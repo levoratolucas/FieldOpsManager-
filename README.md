@@ -46,11 +46,11 @@ Este projeto é parte de um estudo pessoal com foco em:
 
 ## 🧠 Autor
 
-Desenvolvido por [Seu Nome] como parte do seu aprendizado e evolução como desenvolvedor Java.  
+Desenvolvido por Lucas Matheus Levorato Santos (levoratech) como parte do seu aprendizado e evolução como desenvolvedor Java.  
 Este projeto é documentado por sprints quinzenais e pensado para ser um case de portfólio técnico.
 
 ---
 
 ## 📝 Licença
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
+Este projeto está licenciado sob a levoratech(LICENSE).

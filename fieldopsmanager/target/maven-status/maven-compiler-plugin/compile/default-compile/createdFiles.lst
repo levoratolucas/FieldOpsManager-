@@ -1,0 +1,4 @@
+com\osapp\controller\ColaboradorController.class
+com\osapp\model\Colaborador.class
+com\osapp\App.class
+com\osapp\repository\ColaboradorDAO.class

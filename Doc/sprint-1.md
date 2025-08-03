@@ -51,7 +51,7 @@ Todas as entidades principais foram criadas com anotações JPA:
 ---
 
 ## 🔁 Relacionamentos JPA
-- Uso de `@ManyToOne`, `@OneToMany` para relacionar entidades como `Colaborador` com `Cidade`, `Contato`, etc.
+- Uso de `@ManyToOne`, `@OneToMany` para relacionar entidades como `endereço` com `Cidade`, `Contato`, etc.
 
 ---
 

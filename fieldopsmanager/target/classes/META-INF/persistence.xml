@@ -1,22 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- persistence.xml  -->
+
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
 
-    <persistence-unit name="meu-projeto-jpa">
+    <persistence-unit name="osappPU">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.seus.pacote.SuaEntidade</class> <properties>
-            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
-<property name="jakarta.persistence.jdbc.url" value="" />
-<property name="jakarta.persistence.jdbc.user" value="" />
-<property name="jakarta.persistence.jdbc.password" value="" />
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-            <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.format_sql" value="true" />
+        <!-- Suas entidades -->
+        <class>com.osapp.model.Colaborador</class>
+
+        <!-- NÃO coloque as propriedades aqui se estiver usando o JpaUtil -->
+        <!-- Apenas o Hibernate precisa ser informado -->
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

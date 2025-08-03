@@ -1,10 +1,8 @@
 package com.osapp.util;
 
 
-
-
-import java.io.IOException;
 import java.io.InputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -23,6 +21,7 @@ public class JpaUtil {
                 if (input == null) {
                     throw new RuntimeException("Arquivo config.properties não encontrado no classpath.");
                 }
+
                 Properties props = new Properties();
                 props.load(input);
 
@@ -32,7 +31,8 @@ public class JpaUtil {
                 configOverrides.put("jakarta.persistence.jdbc.password", props.getProperty("db.password"));
                 configOverrides.put("jakarta.persistence.jdbc.driver", "org.postgresql.Driver");
 
-                emf = Persistence.createEntityManagerFactory("meu-projeto-jpa", configOverrides);
+                emf = Persistence.createEntityManagerFactory("osappPU", configOverrides);
+
             } catch (IOException e) {
                 throw new RuntimeException("Erro ao carregar config.properties", e);
             }
@@ -50,4 +50,3 @@ public class JpaUtil {
         }
     }
 }
-

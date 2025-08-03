@@ -1,33 +1,32 @@
 package com.osapp.controller;
 
-import com.osapp.dao.ColaboradorDao;
-import com.osapp.model.Colaborador;
-
-import jakarta.persistence.EntityManager;
 import java.util.List;
 
+import com.osapp.dao.ColaboradorDao;
+import com.osapp.model.Colaborador;
+import com.osapp.util.JpaUtil;
+
+import jakarta.persistence.EntityManager;
 
 public class ColaboradorController {
-    private ColaboradorDao dao;
-
-    public ColaboradorController(EntityManager em) {
-        this.dao = new ColaboradorDao(em);
-    }
 
     public void adicionarColaborador(String nome, String cargo) {
-        Colaborador colaborador = new Colaborador(nome, cargo);
-        dao.salvar(colaborador);
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            ColaboradorDao dao = new ColaboradorDao(em);
+            dao.salvar(new Colaborador(nome, cargo));
+        } finally {
+            em.close();
+        }
     }
 
     public List<Colaborador> listarColaboradores() {
-        return dao.listarTodos();
-    }
-
-    public Colaborador buscarColaboradorPorId(Long id) {
-        return dao.buscarPorId(id);
-    }
-
-    public void deletarColaborador(Long id) {
-        dao.deletar(id);
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            ColaboradorDao dao = new ColaboradorDao(em);
+            return dao.listarTodos();
+        } finally {
+            em.close();
+        }
     }
 }

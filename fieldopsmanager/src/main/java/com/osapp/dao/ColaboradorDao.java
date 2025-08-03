@@ -1,26 +1,32 @@
 package com.osapp.dao;
+import java.util.List;
 
 import com.osapp.model.Colaborador;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import java.util.List;
 
 public class ColaboradorDao {
-
     private EntityManager em;
 
-    public ColaboradorDao(EntityManager em){
+    public ColaboradorDao(EntityManager em) {
         this.em = em;
     }
 
     public void salvar(Colaborador colaborador) {
-        em.persist(colaborador);
+        try {
+            em.getTransaction().begin();
+            em.persist(colaborador);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     public List<Colaborador> listarTodos() {
-        TypedQuery<Colaborador> query = em.createQuery("SELECT c FROM Colaborador c", Colaborador.class);
-        return query.getResultList();
+        return em.createQuery("SELECT c FROM Colaborador c", Colaborador.class).getResultList();
     }
 
     public Colaborador buscarPorId(Long id) {
@@ -28,9 +34,11 @@ public class ColaboradorDao {
     }
 
     public void deletar(Long id) {
-        Colaborador colaborador = em.find(Colaborador.class, id);
-        if (colaborador != null) {
-            em.remove(colaborador);
+        Colaborador c = em.find(Colaborador.class, id);
+        if (c != null) {
+            em.getTransaction().begin();
+            em.remove(c);
+            em.getTransaction().commit();
         }
     }
 }

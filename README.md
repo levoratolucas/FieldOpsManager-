@@ -19,7 +19,7 @@ Este projeto é parte de um estudo pessoal com foco em:
 - [x] Projeto Java com estrutura modular (camadas: `model`, `dao`, `controller`, `util`)  
 - [x] CRUD funcional via terminal com persistência em banco (JPA/Hibernate)  
 - [x] Relacionamentos entre entidades  
-- [ ] Interface gráfica com JavaFX  
+- [x] Interface gráfica com JavaFX  
 - [ ] Autenticação de usuários  
 - [ ] Logs e histórico de ações (MongoDB)  
 - [ ] Relatórios e filtros de ordens de serviço  
@@ -48,12 +48,13 @@ Este projeto é parte de um estudo pessoal com foco em:
 ## ✅ Progresso - Sprint 1 (Julho/Agosto 2025)
 
 - Estrutura inicial do projeto criada no VSCode  
-- Organização de pacotes: `model`, `dao`, `controller`, `util`, `App`  
+- Organização de pacotes: `model`, `dao`, `controller`, `util`, `App` ,`service` ,`view`
 - Entidades criadas: `Cidade`, `Cliente`, `Colaborador`, `Contato`, `Endereco`, `Equipamento`, `Estado`, `OS`, `Scripts`  
 - Relacionamentos JPA definidos (`@ManyToOne`, `@OneToMany`, etc.)  
-- DAO criado para `Colaborador` com persistência, listagem, busca e remoção  
+- DAO criado para `Colaborador,Estado` com persistência, listagem, busca e remoção  
 - Controller para `Colaborador` com lógica de negócio separada  
 - Testes manuais no terminal com criação e leitura de dados via `App`  
+- Layout basico com javaFX `ColaboradorView` (Sprint 2 antecipado)
 
 ---
 

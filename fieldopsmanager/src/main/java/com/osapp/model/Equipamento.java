@@ -3,27 +3,24 @@ package com.osapp.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "colaboradores")
-public class Colaborador {
-
+@Table(name = "equipamentos")
+public class Equipamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private String cargo;
+    private String tipo;
 
-    // Construtor vazio exigido pelo JPA
-    public Colaborador() {}
+    public Equipamento(){
 
-    // Construtor com parâmetros
-    public Colaborador(String name, String cargo) {
+    }
+    public Equipamento(String name, String tipo){
         this.name = name;
-        this.cargo = cargo;
+        this.tipo = tipo;
     }
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -40,11 +37,11 @@ public class Colaborador {
         this.name = name;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

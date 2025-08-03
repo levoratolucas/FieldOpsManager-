@@ -3,27 +3,25 @@ package com.osapp.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "colaboradores")
-public class Colaborador {
-
+@Table(name = "cidades")
+public class Cidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private String cargo;
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    private Estado estado;
 
-    // Construtor vazio exigido pelo JPA
-    public Colaborador() {}
+    public Cidade() {}
 
-    // Construtor com parâmetros
-    public Colaborador(String name, String cargo) {
+    public Cidade(String name, Estado estado) {
         this.name = name;
-        this.cargo = cargo;
+        this.estado = estado;
     }
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -40,11 +38,11 @@ public class Colaborador {
         this.name = name;
     }
 
-    public String getCargo() {
-        return cargo;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 }

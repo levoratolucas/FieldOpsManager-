@@ -15,7 +15,6 @@
         <!-- NÃO coloque as propriedades aqui se estiver usando o JpaUtil -->
         <!-- Apenas o Hibernate precisa ser informado -->
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>

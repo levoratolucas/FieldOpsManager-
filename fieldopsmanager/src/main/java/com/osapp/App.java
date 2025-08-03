@@ -2,6 +2,7 @@
 // // .\gradlew run  
 package com.osapp;
 
+import com.osapp.view.LayoutDidatico;
 import com.osapp.view.ColaboradorView;
 
 import javafx.application.Application;
@@ -12,10 +13,16 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ColaboradorView colaboradorView = new ColaboradorView();
-        Scene scene = new Scene(colaboradorView.getView(), 600, 400);
+        String title;
+        // ColaboradorView colaboradorView = new ColaboradorView();
+        // Scene scene = new Scene(colaboradorView.getView(), 600, 400);
+        // title = "Gestão de Colaboradores";
 
-        primaryStage.setTitle("Gestão de Colaboradores");
+        LayoutDidatico layoutDidatico = new LayoutDidatico();
+        Scene scene = new Scene(layoutDidatico.getView(), 600, 400);
+        title = "teste view de aprendizado";
+
+        primaryStage.setTitle(title);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

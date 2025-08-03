@@ -2,13 +2,12 @@ package com.osapp.view;
 
 import com.osapp.controller.ColaboradorController;
 import com.osapp.model.Colaborador;
-import com.osapp.util.JpaUtil;
 
-import jakarta.persistence.EntityManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class ColaboradorView {
@@ -21,7 +20,6 @@ public class ColaboradorView {
     private ColaboradorController controller;
 
     public ColaboradorView() {
-        EntityManager em = JpaUtil.getEntityManager();
         this.controller = new ColaboradorController();
 
         layout = new VBox(10);
@@ -36,9 +34,48 @@ public class ColaboradorView {
         reInput.setPromptText("RE");
 
         Button addBtn = new Button("Adicionar");
+        Button editBtn = new Button("Editar");
+        Button deleteBtn = new Button("Excluir");
+
+        HBox buttonBox = new HBox(10, addBtn, editBtn, deleteBtn);
+
         addBtn.setOnAction(e -> {
-            controller.adicionarColaborador(nomeInput.getText(), reInput.getText());
-            atualizarTabela();
+            if (!nomeInput.getText().isEmpty() && !reInput.getText().isEmpty()) {
+                controller.adicionarColaborador(nomeInput.getText(), reInput.getText());
+                showAlert("Sucesso", "Colaborador adicionado com sucesso!", Alert.AlertType.INFORMATION);
+                atualizarTabela();
+            } else {
+                showAlert("Erro", "Preencha todos os campos!", Alert.AlertType.ERROR);
+            }
+        });
+
+        editBtn.setOnAction(e -> {
+            Colaborador selecionado = table.getSelectionModel().getSelectedItem();
+            if (selecionado != null) {
+                selecionado.setName(nomeInput.getText());
+                selecionado.setRe(reInput.getText());
+                controller.atualizarColaborador(selecionado); // método precisa existir no controller
+                showAlert("Sucesso", "Colaborador atualizado com sucesso!", Alert.AlertType.INFORMATION);
+                atualizarTabela();
+            } else {
+                showAlert("Atenção", "Selecione um colaborador para editar", Alert.AlertType.WARNING);
+            }
+        });
+
+        deleteBtn.setOnAction(e -> {
+            Colaborador selecionado = table.getSelectionModel().getSelectedItem();
+            if (selecionado != null) {
+                Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Deseja realmente excluir?", ButtonType.YES, ButtonType.NO);
+                confirm.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.YES) {
+                        controller.deletarColaborador(selecionado.getId());
+                        showAlert("Sucesso", "Colaborador removido!", Alert.AlertType.INFORMATION);
+                        atualizarTabela();
+                    }
+                });
+            } else {
+                showAlert("Atenção", "Selecione um colaborador para excluir", Alert.AlertType.WARNING);
+            }
         });
 
         colaboradores = FXCollections.observableArrayList(controller.listarColaboradores());
@@ -56,7 +93,15 @@ public class ColaboradorView {
         table.getColumns().addAll(idCol, nomeCol, reCol);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        layout.getChildren().addAll(label, nomeInput, reInput, addBtn, table);
+        table.setOnMouseClicked(e -> {
+            Colaborador c = table.getSelectionModel().getSelectedItem();
+            if (c != null) {
+                nomeInput.setText(c.getName());
+                reInput.setText(c.getRe());
+            }
+        });
+
+        layout.getChildren().addAll(label, nomeInput, reInput, buttonBox, table);
     }
 
     public VBox getView() {
@@ -67,5 +112,12 @@ public class ColaboradorView {
         colaboradores.setAll(controller.listarColaboradores());
         nomeInput.clear();
         reInput.clear();
+    }
+
+    private void showAlert(String titulo, String mensagem, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 }

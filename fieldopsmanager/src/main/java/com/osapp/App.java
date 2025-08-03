@@ -4,7 +4,7 @@ package com.osapp;
 
 import com.osapp.view.LayoutDidatico;
 import com.osapp.view.ColaboradorView;
-
+import javafx.scene.image.Image;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,6 +22,9 @@ public class App extends Application {
         Scene scene = new Scene(layoutDidatico.getView(), 600, 400);
         title = "teste view de aprendizado";
 
+        Image icon = new Image(getClass().getResourceAsStream("/imag/logo_.png"));
+        primaryStage.getIcons().add(icon);
+
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -31,7 +34,8 @@ public class App extends Application {
         launch(args);
     }
 }
-// // ---------------------- pra migrar as tabelas ------------------------------
+// // ---------------------- pra migrar as tabelas
+// ------------------------------
 // package com.osapp;
 
 // import com.osapp.controller.ColaboradorController;
@@ -42,21 +46,19 @@ public class App extends Application {
 // import java.util.List;
 
 // public class App {
-//     public static void main(String[] args) {
-//         EntityManager em = JpaUtil.getEntityManager();
+// public static void main(String[] args) {
+// EntityManager em = JpaUtil.getEntityManager();
 
-//         try {
-//             em.getTransaction().begin();
+// try {
+// em.getTransaction().begin();
 
-           
-//             em.getTransaction().commit();
-//         } catch (Exception e) {
-//             em.getTransaction().rollback();
-//             e.printStackTrace();
-//         } finally {
-//             em.close();
-//             JpaUtil.close();
-//         }
-//     }
+// em.getTransaction().commit();
+// } catch (Exception e) {
+// em.getTransaction().rollback();
+// e.printStackTrace();
+// } finally {
+// em.close();
+// JpaUtil.close();
 // }
-
+// }
+// }

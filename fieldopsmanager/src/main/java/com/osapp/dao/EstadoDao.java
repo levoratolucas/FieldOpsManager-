@@ -1,26 +1,32 @@
 package com.osapp.dao;
+import java.util.List;
 
 import com.osapp.model.Estado;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import java.util.List;
 
 public class EstadoDao {
-
     private EntityManager em;
 
-    public EstadoDao(EntityManager em){
+    public EstadoDao(EntityManager em) {
         this.em = em;
     }
 
     public void salvar(Estado estado) {
-        em.persist(estado);
+        try {
+            em.getTransaction().begin();
+            em.persist(estado);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     public List<Estado> listarTodos() {
-        TypedQuery<Estado> query = em.createQuery("SELECT c FROM Estado c", Estado.class);
-        return query.getResultList();
+        return em.createQuery("SELECT c FROM Estado c", Estado.class).getResultList();
     }
 
     public Estado buscarPorId(Long id) {
@@ -28,9 +34,11 @@ public class EstadoDao {
     }
 
     public void deletar(Long id) {
-        Estado estado = em.find(Estado.class, id);
-        if (estado != null) {
-            em.remove(estado);
+        Estado c = em.find(Estado.class, id);
+        if (c != null) {
+            em.getTransaction().begin();
+            em.remove(c);
+            em.getTransaction().commit();
         }
     }
 }

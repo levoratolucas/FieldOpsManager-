@@ -1,51 +1,111 @@
-# 📋 Sprint 1 - Julho/Agosto 2025
+# 🏁 Sprint 1 - FieldOpsManager  
+📅 Período: 28/07/2025 a 10/08/2025
 
-## Objetivo
-Estabelecer a base do projeto `FieldOpsManager`, com foco em estruturação de código, persistência de dados e modelagem inicial.
+## 🎯 Objetivo da Sprint
+Estabelecer a fundação do projeto FieldOpsManager, com foco em modelagem das entidades principais, estrutura modular por camadas e persistência de dados via JPA/Hibernate. A sprint visa garantir o funcionamento básico de cadastro e leitura no banco de dados, além de definir uma base sólida para as próximas fases.
 
 ---
 
-## ✅ Entregas concluídas
+## 📦 Entregas da Sprint
 
-### Estruturação de Projeto
-- Projeto iniciado com Java puro e Gradle
-- Criação da estrutura de pacotes:
-  - `com.osapp.model`
-  - `com.osapp.dao`
-  - `com.osapp.controller`
-  - `com.osapp.util`
-  - `com.osapp.App` (classe principal)
+### ✅ Estrutura do Projeto
+- Projeto configurado no VSCode
+- Organização de pacotes:
+  - `model` – entidades JPA
+  - `dao` – acesso a dados (Data Access Object)
+  - `controller` – camada de lógica de negócio
+  - `util` – utilitários do sistema
+  - `App` – ponto de entrada para testes
 
-### Modelagem de Dados
-- Entidade `Colaborador` com atributos: `id`, `name`, `cargo`
-- Entidade `OS` (ordem de serviço) com relacionamento com `Cliente` e `Colaborador`
-- Entidade `Scripts` com relacionamentos para `Equipamento` e `OS`
-- Mapeamento JPA completo com `@Entity`, `@Id`, `@GeneratedValue`, `@ManyToOne`, `@Lob`, `@Table`
+---
 
-### Persistência de Dados
-- `ColaboradorDao` criado com métodos:
+## 🧱 Entidades Criadas
+
+### Modelagem JPA
+Todas as entidades principais foram criadas com anotações JPA:
+
+- [x] Cidade
+- [x] Cliente
+- [x] Colaborador
+- [x] Contato
+- [x] Endereco
+- [x] Equipamento
+- [x] Estado
+- [x] OS
+- [x] Scripts
+
+### DAO e Controller
+
+| Entidade     | DAO         | Controller   |
+|--------------|-------------|--------------|
+| Cidade       | ❌           | ❌            |
+| Cliente      | ❌           | ❌            |
+| Colaborador  | ✅ `ColaboradorDao.java` | ✅ `ColaboradorController.java` |
+| Contato      | ❌           | ❌            |
+| Endereco     | ❌           | ❌            |
+| Equipamento  | ❌           | ❌            |
+| Estado       | ❌           | ❌            |
+| OS           | ❌           | ❌            |
+| Scripts      | ❌           | ❌            |
+
+---
+
+## 🔁 Relacionamentos JPA
+- Uso de `@ManyToOne`, `@OneToMany` para relacionar entidades como `Colaborador` com `Cidade`, `Contato`, etc.
+
+---
+
+## ✅ DAO Funcional
+
+- `ColaboradorDao.java`:
   - `salvar(Colaborador)`
   - `listarTodos()`
   - `buscarPorId(Long)`
-  - `deletar(Long)`
-- Uso do `EntityManager` para operações transacionais
-- Transações gerenciadas com `try/catch/finally` e rollback automático em caso de erro
-
-### Lógica de Negócio
-- `ColaboradorController` criado para isolar regras de negócio
-- Métodos: `adicionarColaborador()` e `listarColaboradores()`
-- Injeção de `EntityManager` por parâmetro para maior flexibilidade
-
-### Testes
-- Classe `App.java` usada como ponto de entrada
-- Inserção e listagem de colaboradores testada via terminal
+  - `remover(Long)`
+- Testado com persistência real via terminal
 
 ---
 
-## 📌 Considerações
-- Projeto avançando conforme cronograma inicial
-- Próxima etapa incluirá mais entidades (`Cliente`, `Equipamento`, etc.), autenticação básica e início da interface JavaFX
+## ✅ Controller Implementado
+
+- `ColaboradorController.java`:
+  - Camada de lógica de negócio para manipulação de dados via DAO
 
 ---
 
-Lucas Levorato — Julho/Agosto 2025
+## 🟡 Em Progresso
+
+- DAO e Controller das demais entidades
+- Testes e integração com as outras entidades do sistema
+
+---
+
+## ⚠️ Itens de Segurança
+
+- Credenciais e arquivos sensíveis **não estão versionados**
+- Informações como URL, usuário e senha do banco ficam no `config.properties` (fora do Git)
+
+---
+
+## 📌 Observações
+
+- Persistência configurada via `persistence.xml`
+- Banco de dados: PostgreSQL
+- Interface gráfica ainda não iniciada
+
+---
+
+## 🧠 Lições Aprendidas
+
+- Separar camadas melhora a manutenibilidade
+- Estrutura modular ajuda na escalabilidade do projeto
+- A prática com JPA reforçou o entendimento de mapeamentos e persistência
+
+---
+
+## 📍 Próximos Passos (Sprint 2)
+
+- Iniciar JavaFX (interface gráfica)
+- Adicionar autenticação de usuários
+- Considerar uso de MongoDB para logs/auditoria
+

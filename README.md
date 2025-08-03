@@ -1,111 +1,69 @@
-# 🏁 Sprint 1 - FieldOpsManager  
-📅 Período: 28/07/2025 a 10/08/2025
+# FieldOpsManager
 
-## 🎯 Objetivo da Sprint
-Estabelecer a fundação do projeto FieldOpsManager, com foco em modelagem das entidades principais, estrutura modular por camadas e persistência de dados via JPA/Hibernate. A sprint visa garantir o funcionamento básico de cadastro e leitura no banco de dados, além de definir uma base sólida para as próximas fases.
+**FieldOpsManager** é uma aplicação Java de gestão de ordens de serviço desenvolvida com o objetivo de registrar e acompanhar as atividades realizadas por técnicos de campo na área de dados e redes corporativas.
 
----
+Este projeto é parte de um estudo pessoal com foco em:
 
-## 📦 Entregas da Sprint
-
-### ✅ Estrutura do Projeto
-- Projeto configurado no VSCode
-- Organização de pacotes:
-  - `model` – entidades JPA
-  - `dao` – acesso a dados (Data Access Object)
-  - `controller` – camada de lógica de negócio
-  - `util` – utilitários do sistema
-  - `App` – ponto de entrada para testes
+- Boas práticas com Java moderno  
+- Arquitetura limpa e modular  
+- Uso de ORM com JPA/Hibernate  
+- Integração com bancos de dados (PostgreSQL e MongoDB)  
+- Interface gráfica com JavaFX  
+- Autenticação e permissões de usuários  
 
 ---
 
-## 🧱 Entidades Criadas
+## 🚀 Funcionalidades (em progresso)
 
-### Modelagem JPA
-Todas as entidades principais foram criadas com anotações JPA:
-
-- [x] Cidade
-- [x] Cliente
-- [x] Colaborador
-- [x] Contato
-- [x] Endereco
-- [x] Equipamento
-- [x] Estado
-- [x] OS
-- [x] Scripts
-
-### DAO e Controller
-
-| Entidade     | DAO         | Controller   |
-|--------------|-------------|--------------|
-| Cidade       | ❌           | ❌            |
-| Cliente      | ❌           | ❌            |
-| Colaborador  | ✅ `ColaboradorDao.java` | ✅ `ColaboradorController.java` |
-| Contato      | ❌           | ❌            |
-| Endereco     | ❌           | ❌            |
-| Equipamento  | ❌           | ❌            |
-| Estado       | ❌           | ❌            |
-| OS           | ❌           | ❌            |
-| Scripts      | ❌           | ❌            |
+- [x] Modelagem de dados orientada a objetos  
+- [x] Projeto Java com estrutura modular (camadas: `model`, `dao`, `controller`, `util`)  
+- [x] CRUD funcional via terminal com persistência em banco (JPA/Hibernate)  
+- [x] Relacionamentos entre entidades  
+- [ ] Interface gráfica com JavaFX  
+- [ ] Autenticação de usuários  
+- [ ] Logs e histórico de ações (MongoDB)  
+- [ ] Relatórios e filtros de ordens de serviço  
 
 ---
 
-## 🔁 Relacionamentos JPA
-- Uso de `@ManyToOne`, `@OneToMany` para relacionar entidades como `Colaborador` com `Cidade`, `Contato`, etc.
+## 🧱 Tecnologias utilizadas
+
+- Java 17  
+- Spring Boot  
+- Spring Data JPA (Hibernate)  
+- PostgreSQL  
+- MongoDB *(futuro)*  
+- JavaFX *(interface gráfica)*  
+- Gradle *(build)*  
+- Lombok *(redução de boilerplate)*  
 
 ---
 
-## ✅ DAO Funcional
+## 📚 Objetivo do projeto
 
-- `ColaboradorDao.java`:
-  - `salvar(Colaborador)`
-  - `listarTodos()`
-  - `buscarPorId(Long)`
-  - `remover(Long)`
-- Testado com persistência real via terminal
+> Desenvolver um sistema completo, realista e funcional que permita acompanhar a rotina de trabalho de um técnico de campo. A aplicação foi planejada para explorar conceitos intermediários e avançados da linguagem Java, incluindo persistência, orientação a objetos, uso de frameworks e arquitetura limpa.
 
 ---
 
-## ✅ Controller Implementado
+## ✅ Progresso - Sprint 1 (Julho/Agosto 2025)
 
-- `ColaboradorController.java`:
-  - Camada de lógica de negócio para manipulação de dados via DAO
-
----
-
-## 🟡 Em Progresso
-
-- DAO e Controller das demais entidades
-- Testes e integração com as outras entidades do sistema
+- Estrutura inicial do projeto criada no VSCode  
+- Organização de pacotes: `model`, `dao`, `controller`, `util`, `App`  
+- Entidades criadas: `Cidade`, `Cliente`, `Colaborador`, `Contato`, `Endereco`, `Equipamento`, `Estado`, `OS`, `Scripts`  
+- Relacionamentos JPA definidos (`@ManyToOne`, `@OneToMany`, etc.)  
+- DAO criado para `Colaborador` com persistência, listagem, busca e remoção  
+- Controller para `Colaborador` com lógica de negócio separada  
+- Testes manuais no terminal com criação e leitura de dados via `App`  
 
 ---
 
-## ⚠️ Itens de Segurança
+## 🧠 Autor
 
-- Credenciais e arquivos sensíveis **não estão versionados**
-- Informações como URL, usuário e senha do banco ficam no `config.properties` (fora do Git)
-
----
-
-## 📌 Observações
-
-- Persistência configurada via `persistence.xml`
-- Banco de dados: PostgreSQL
-- Interface gráfica ainda não iniciada
+Desenvolvido por **Lucas Matheus Levorato Santos** ([@levoratech](mailto:lucaslevorato@levoratech.com)) como parte do seu aprendizado e evolução como desenvolvedor Java.  
+Este projeto é documentado por sprints quinzenais e pensado como um case de portfólio técnico.
 
 ---
 
-## 🧠 Lições Aprendidas
+## 📝 Licença
 
-- Separar camadas melhora a manutenibilidade
-- Estrutura modular ajuda na escalabilidade do projeto
-- A prática com JPA reforçou o entendimento de mapeamentos e persistência
-
----
-
-## 📍 Próximos Passos (Sprint 2)
-
-- Iniciar JavaFX (interface gráfica)
-- Adicionar autenticação de usuários
-- Considerar uso de MongoDB para logs/auditoria
-
+Este projeto está licenciado sob a **Levoratech License** – uso pessoal, educacional e profissional permitido com créditos ao autor.

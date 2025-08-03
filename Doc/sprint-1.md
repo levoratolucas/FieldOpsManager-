@@ -73,6 +73,12 @@ Todas as entidades principais foram criadas com anotações JPA:
 
 ---
 
+## ✅ Front insert colaborador Implementado
+
+- `ColaboradorView.java`:
+  - Camada de exibição para inserção de colaboradores via controller
+
+---
 ## 🟡 Em Progresso
 
 - DAO e Controller das demais entidades

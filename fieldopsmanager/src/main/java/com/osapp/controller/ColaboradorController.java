@@ -1,26 +1,33 @@
 package com.osapp.controller;
 
+import com.osapp.dao.ColaboradorDao;
 import com.osapp.model.Colaborador;
-import com.osapp.repository.ColaboradorDAO;
 
+import jakarta.persistence.EntityManager;
 import java.util.List;
 
+
 public class ColaboradorController {
+    private ColaboradorDao dao;
 
-    private ColaboradorDAO dao = new ColaboradorDAO();
+    public ColaboradorController(EntityManager em) {
+        this.dao = new ColaboradorDao(em);
+    }
 
-    public void criar(String nome, String re) {
-        Colaborador colaborador = new Colaborador(nome, re);
+    public void adicionarColaborador(String nome, String cargo) {
+        Colaborador colaborador = new Colaborador(nome, cargo);
         dao.salvar(colaborador);
-        System.out.println("Colaborador salvo com sucesso.");
     }
 
-    public void listar() {
-        List<Colaborador> colaboradores = dao.listarTodos();
-        colaboradores.forEach(System.out::println);
+    public List<Colaborador> listarColaboradores() {
+        return dao.listarTodos();
     }
 
-    public void finalizar() {
-        dao.fechar();
+    public Colaborador buscarColaboradorPorId(Long id) {
+        return dao.buscarPorId(id);
+    }
+
+    public void deletarColaborador(Long id) {
+        dao.deletar(id);
     }
 }

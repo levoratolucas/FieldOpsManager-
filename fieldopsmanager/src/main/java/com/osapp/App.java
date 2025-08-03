@@ -1,33 +1,34 @@
 package com.osapp;
+
+import com.osapp.controller.ColaboradorController;
+import com.osapp.model.Colaborador;
 import com.osapp.util.JpaUtil;
 
 import jakarta.persistence.EntityManager;
-/**
- * Hello world!
- *
- */
-public class App 
-{
+import java.util.List;
+
+public class App {
     public static void main(String[] args) {
-        System.out.println("Iniciando teste de conexão...");
+        EntityManager em = JpaUtil.getEntityManager();
+        ColaboradorController controller = new ColaboradorController(em);
 
         try {
-            EntityManager em = JpaUtil.getEntityManager();
-
             em.getTransaction().begin();
 
-            // Você pode fazer uma query simples, por exemplo, a consulta de uma entidade
-            // Ou só abrir e fechar a transação para testar a conexão
+            controller.adicionarColaborador("Izabella Santos", "Compras");
+
+            List<Colaborador> lista = controller.listarColaboradores();
+            for (Colaborador c : lista) {
+                System.out.println("ID: " + c.getId() + " | Nome: " + c.getName() + " | Cargo: " + c.getCargo());
+            }
+
             em.getTransaction().commit();
-
-            em.close();
-
-            System.out.println("Conexão com banco OK!");
         } catch (Exception e) {
-            System.err.println("Erro na conexão com banco:");
+            em.getTransaction().rollback();
             e.printStackTrace();
         } finally {
-            JpaUtil.close();  // fecha o factory
+            em.close();
+            JpaUtil.close();
         }
     }
 }

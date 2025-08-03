@@ -1,167 +1,114 @@
-Requisitos e Configuração do Projeto Java com Hibernate e PostgreSQL
-Visão Geral
-Este projeto utiliza:
+# Preparação do Ambiente para Projeto Java com Hibernate
 
-Java 17 (ou superior)
+## Requisitos do Projeto
 
-Hibernate 6.3.1 como implementação JPA
+- Linguagem: Java  
+- ORM: Hibernate  
+- Banco de dados: PostgreSQL (relacional) e MongoDB (não relacional — uso futuro)  
+- IDE recomendada: IntelliJ IDEA (ou Eclipse/VSCode)  
+- Gerenciador de dependências: Maven  
 
-Jakarta Persistence API 3.1.0
+---
 
-PostgreSQL 42.7.3 driver JDBC
+## Instalações Necessárias
 
-Gerenciador de dependências Maven
+### 1. Instalar Java JDK 17+
 
-IDE recomendada: IntelliJ IDEA (Community ou Ultimate), Eclipse ou VSCode
+1. Acesse: https://jdk.java.net  
+2. Baixe o JDK 17 (ou superior)  
+3. Instale e configure a variável de ambiente `JAVA_HOME`  
+4. Verifique a instalação com o comando no terminal:
 
-Passos para Preparação do Ambiente
-1. Instalar Java JDK 17+
-Baixe e instale o JDK 17 ou superior: https://jdk.java.net
-
-Configure a variável de ambiente JAVA_HOME apontando para a instalação do JDK
-
-Verifique com:
-
-bash
-Copiar
-Editar
+```bash
 java -version
-2. Instalar PostgreSQL
-Baixe e instale o PostgreSQL: https://www.postgresql.org/download/
+```
 
-Configure um usuário (exemplo: postgres) e uma senha segura
+### 2. Instalar PostgreSQL
 
-(Opcional) Instale o pgAdmin para facilitar o gerenciamento visual
+1. Acesse: https://www.postgresql.org/download/  
+2. Instale o PostgreSQL e anote:  
+   - Usuário: `postgres`  
+   - Senha definida durante a instalação  
+3. Instale também o **pgAdmin** (interface gráfica para o PostgreSQL)
 
-3. Instalar Maven
-Verifique se o Maven está instalado com:
+### 3. Instalar Maven
 
-bash
-Copiar
-Editar
+1. Verifique se já está instalado com:
+
+```bash
 mvn -v
-Caso não, baixe: https://maven.apache.org/download.cgi
+```
 
-Configure MAVEN_HOME e atualize o PATH do sistema
+2. Se não estiver instalado:  
+   - Acesse: https://maven.apache.org/download.cgi  
+   - Baixe e extraia o Maven  
+   - Configure a variável de ambiente `MAVEN_HOME` e adicione ao `PATH`
 
-4. Configurar o Projeto no IntelliJ IDEA
-Crie um novo projeto Maven usando o JDK instalado
+### 4. Instalar IntelliJ IDEA
 
-Defina o grupo (groupId) como com.osapp e artifact (artifactId) como fieldopsmanager
+1. Acesse: https://www.jetbrains.com/idea/  
+2. Baixe a versão **Community** (gratuita)  
+3. Após instalar:  
+   - Crie um novo projeto Java  
+   - Selecione Maven como gerenciador de dependências  
+   - Escolha o JDK instalado
 
-Organize a estrutura do projeto da seguinte forma:
+---
 
-css
-Copiar
-Editar
-fieldopsmanager/
- └── src/
-      └── main/
-          ├── java/
-          │    └── com/
-          │        └── osapp/
-          │             ├── controller/
-          │             ├── dao/
-          │             ├── model/
-          │             ├── service/
-          │             └── util/
-          └── resources/
-               └── META-INF/
-                   └── persistence.xml
-5. Configuração do pom.xml
-Adicione as seguintes dependências no seu pom.xml:
+## Criar Estrutura Inicial do Projeto
 
-xml
-Copiar
-Editar
+1. Crie um novo projeto Maven no IntelliJ com a seguinte estrutura:
+
+```
+src/
+ └── main/
+     ├── java/
+     │    └── com.seuprojeto
+     └── resources/
+```
+
+2. No arquivo `pom.xml`, adicione as dependências básicas:
+
+```xml
 <dependencies>
-  <!-- Jakarta Persistence API -->
+  <!-- Hibernate Core -->
   <dependency>
-    <groupId>jakarta.persistence</groupId>
-    <artifactId>jakarta.persistence-api</artifactId>
-    <version>3.1.0</version>
-  </dependency>
-
-  <!-- Hibernate Core 6.3.1 -->
-  <dependency>
-    <groupId>org.hibernate.orm</groupId>
+    <groupId>org.hibernate</groupId>
     <artifactId>hibernate-core</artifactId>
-    <version>6.3.1.Final</version>
+    <version>5.6.15.Final</version>
   </dependency>
 
-  <!-- Driver PostgreSQL 42.7.3 -->
+  <!-- PostgreSQL Driver -->
   <dependency>
     <groupId>org.postgresql</groupId>
     <artifactId>postgresql</artifactId>
-    <version>42.7.3</version>
+    <version>42.3.1</version>
   </dependency>
 
-  <!-- (Opcional) Commons Math -->
+  <!-- JPA API -->
   <dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-math3</artifactId>
-    <version>3.6.1</version>
+    <groupId>jakarta.persistence</groupId>
+    <artifactId>jakarta.persistence-api</artifactId>
+    <version>2.2.3</version>
   </dependency>
 </dependencies>
-6. Configuração do arquivo persistence.xml
-Localize o arquivo em src/main/resources/META-INF/persistence.xml
+```
 
-Use a configuração para o Hibernate 6 e PostgreSQL, exemplo:
+---
 
-xml
-Copiar
-Editar
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
-                                 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
-             version="2.2">
+## Testar Configuração
 
-    <persistence-unit name="osappPU">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        
-        <class>com.osapp.model.Colaborador</class>
+1. Crie uma classe Java simples:
 
-        <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/seubanco"/>
-            <property name="jakarta.persistence.jdbc.user" value="seuusuario"/>
-            <property name="jakarta.persistence.jdbc.password" value="suasenha"/>
-            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.show_sql" value="true"/>
-        </properties>
-    </persistence-unit>
-</persistence>
-Ajuste URL, usuário e senha conforme seu ambiente.
-
-7. Execução do projeto com Maven
-Para compilar:
-
-bash
-Copiar
-Editar
-mvn clean compile
-Para executar (certifique-se que a classe principal está configurada):
-
-bash
-Copiar
-Editar
-mvn exec:java
-(Configurado para a classe principal com.osapp.App no seu pom.xml)
-
-8. Teste simples
-Crie uma classe App.java em com.osapp com:
-
-java
-Copiar
-Editar
-package com.osapp;
-
-public class App {
+```java
+public class TesteAmbiente {
     public static void main(String[] args) {
-        System.out.println("Ambiente configurado com sucesso!");
+        System.out.println("Ambiente OK!");
     }
 }
-Compile e rode para garantir que tudo está funcionando
+```
+
+2. Execute o programa.  
+3. Se a mensagem aparecer, seu ambiente está pronto para iniciar o desenvolvimento com Hibernate.
+
+---

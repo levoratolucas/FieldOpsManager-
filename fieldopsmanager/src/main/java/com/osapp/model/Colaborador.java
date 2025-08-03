@@ -12,15 +12,15 @@ public class Colaborador {
 
     private String name;
 
-    private String cargo;
+    private String re;
 
     // Construtor vazio exigido pelo JPA
     public Colaborador() {}
 
     // Construtor com parâmetros
-    public Colaborador(String name, String cargo) {
+    public Colaborador(String name, String re) {
         this.name = name;
-        this.cargo = cargo;
+        this.re = re;
     }
 
     // Getters e Setters
@@ -40,11 +40,11 @@ public class Colaborador {
         this.name = name;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getRe() {
+        return re;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setRe(String re) {
+        this.re = re;
     }
 }

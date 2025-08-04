@@ -1,17 +1,50 @@
 package com.osapp.util;
 
+import java.util.*;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 public class Tools {
 
-    public static void criarHeader(BorderPane root) {
-        Label header = new Label("HEADER");
-        header.setStyle("-fx-background-color: #6495ED; -fx-text-fill: white; -fx-font-size: 18px;");
-        header.setPadding(new Insets(10));
+    // public static void criarHeader(BorderPane root, String nameLabel, String
+    // style, int padding) {
+    // Label header = new Label(nameLabel);
+    // header.setStyle(style);
+    // header.setPadding(new Insets(padding));
+    // header.setMaxWidth(Double.MAX_VALUE);
+    // BorderPane.setMargin(header, new Insets(0, 0, 5, 0));
+    // root.setTop(header);
+    // }
+
+    public static List<Button> Buttons(String... names) {
+        List<Button> botoes = new ArrayList<>();
+
+        for (String name : names) {
+            botoes.add(new Button(name));
+        }
+
+        return botoes;
+    }
+
+    public static void criarHeader(BorderPane root, String title, String style, int padding, List<Button> botoes) {
+        Label titleLabel = new Label(title);
+        titleLabel.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS); // empurra os botões para a direita
+
+        HBox header = new HBox(10); // espaçamento entre elementos
+        header.setStyle(style);
+        header.setPadding(new Insets(padding));
         header.setMaxWidth(Double.MAX_VALUE);
+
+        // Adiciona título, espaçador e os botões recebidos
+        header.getChildren().add(titleLabel);
+        header.getChildren().add(spacer);
+        header.getChildren().addAll(botoes);
+
         BorderPane.setMargin(header, new Insets(0, 0, 5, 0));
         root.setTop(header);
     }

@@ -9,7 +9,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import com.osapp.util.Tools;
+import com.osapp.util.*;
+import javafx.event.*;
 
 public class ColaboradorView {
     private VBox layout;
@@ -34,49 +35,16 @@ public class ColaboradorView {
         reInput = new TextField();
         reInput.setPromptText("RE");
 
-        List<Button> btn = Tools.Buttons("ADD", "EDITAR", "EXCLUIR");
+        String[] nomes = { "Adicionar", "Editar", "Excluir" };
+
+        List<EventHandler<ActionEvent>> acoes = List.of(
+                e -> add(),
+                e -> edit(),
+                e -> delete());
+
+        List<Button> btn = Tools.criarBotoes(nomes, acoes);
 
         HBox buttonBox = new HBox(10, btn.get(0), btn.get(1), btn.get(2));
-
-        btn.get(0).setOnAction(e -> {
-            if (!nomeInput.getText().isEmpty() && !reInput.getText().isEmpty()) {
-                controller.adicionarColaborador(nomeInput.getText(), reInput.getText());
-                showAlert("Sucesso", "Colaborador adicionado com sucesso!", Alert.AlertType.INFORMATION);
-                atualizarTabela();
-            } else {
-                showAlert("Erro", "Preencha todos os campos!", Alert.AlertType.ERROR);
-            }
-        });
-
-        btn.get(1).setOnAction(e -> {
-            Colaborador selecionado = table.getSelectionModel().getSelectedItem();
-            if (selecionado != null) {
-                selecionado.setName(nomeInput.getText());
-                selecionado.setRe(reInput.getText());
-                controller.atualizarColaborador(selecionado); // método precisa existir no controller
-                showAlert("Sucesso", "Colaborador atualizado com sucesso!", Alert.AlertType.INFORMATION);
-                atualizarTabela();
-            } else {
-                showAlert("Atenção", "Selecione um colaborador para editar", Alert.AlertType.WARNING);
-            }
-        });
-
-        btn.get(2).setOnAction(e -> {
-            Colaborador selecionado = table.getSelectionModel().getSelectedItem();
-            if (selecionado != null) {
-                Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Deseja realmente excluir?", ButtonType.YES,
-                        ButtonType.NO);
-                confirm.showAndWait().ifPresent(response -> {
-                    if (response == ButtonType.YES) {
-                        controller.deletarColaborador(selecionado.getId());
-                        showAlert("Sucesso", "Colaborador removido!", Alert.AlertType.INFORMATION);
-                        atualizarTabela();
-                    }
-                });
-            } else {
-                showAlert("Atenção", "Selecione um colaborador para excluir", Alert.AlertType.WARNING);
-            }
-        });
 
         colaboradores = FXCollections.observableArrayList(controller.listarColaboradores());
 
@@ -119,5 +87,46 @@ public class ColaboradorView {
         alert.setTitle(titulo);
         alert.setContentText(mensagem);
         alert.showAndWait();
+    }
+
+    public void add() {
+        if (!nomeInput.getText().isEmpty() && !reInput.getText().isEmpty()) {
+            controller.adicionarColaborador(nomeInput.getText(), reInput.getText());
+            showAlert("Sucesso", "Colaborador adicionado com sucesso!", Alert.AlertType.INFORMATION);
+            atualizarTabela();
+        } else {
+            showAlert("Erro", "Preencha todos os campos!", Alert.AlertType.ERROR);
+        }
+    }
+
+    public void edit() {
+        Colaborador selecionado = table.getSelectionModel().getSelectedItem();
+        if (selecionado != null) {
+            selecionado.setName(nomeInput.getText());
+            selecionado.setRe(reInput.getText());
+            controller.atualizarColaborador(selecionado); // método precisa existir no controller
+            showAlert("Sucesso", "Colaborador atualizado com sucesso!", Alert.AlertType.INFORMATION);
+            atualizarTabela();
+        } else {
+            showAlert("Atenção", "Selecione um colaborador para editar", Alert.AlertType.WARNING);
+        }
+    }
+
+    public void delete() {
+        Colaborador selecionado = table.getSelectionModel().getSelectedItem();
+        if (selecionado != null) {
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Deseja realmente excluir?",
+                    ButtonType.YES,
+                    ButtonType.NO);
+            confirm.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.YES) {
+                    controller.deletarColaborador(selecionado.getId());
+                    showAlert("Sucesso", "Colaborador removido!", Alert.AlertType.INFORMATION);
+                    atualizarTabela();
+                }
+            });
+        } else {
+            showAlert("Atenção", "Selecione um colaborador para excluir", Alert.AlertType.WARNING);
+        }
     }
 }

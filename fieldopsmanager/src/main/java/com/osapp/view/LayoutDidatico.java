@@ -2,8 +2,9 @@ package com.osapp.view;
 
 import java.util.*;
 import com.osapp.util.Tools;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import javafx.event.*;
 
 public class LayoutDidatico {
     private BorderPane root;
@@ -11,13 +12,26 @@ public class LayoutDidatico {
     public LayoutDidatico() {
         root = new BorderPane();
 
-        List<Button> botoes = Tools.Buttons("btn1", "btn2", "btn3", "btn4","btn1", "btn2", "btn3", "btn4");
+        String[] nomes = { "Salvar", "Editar", "Excluir" };
+
+        List<EventHandler<ActionEvent>> acoes = List.of(
+                e -> System.out.println("Salvando..."),
+                e -> System.out.println("Editando..."),
+                e -> System.out.println("Excluindo..."));
+
+        List<Button> botoes = Tools.criarBotoes(nomes, acoes);
 
         String estilo = "-fx-background-color: #6495ED;";
 
-        Tools.criarHeader(root, "Minha App", estilo, 10, botoes);
-        Tools.criarMain(root);
-        Tools.criarFooter(root);
+        HBox header = Tools.criarHeader("Minha App", estilo, 10, botoes);
+        VBox nav = Tools.nav();
+        VBox workspace = Tools.workspace();
+        HBox mainContent = Tools.criarMain(nav, workspace);
+        Label footer = Tools.criarFooter();
+
+        root.setTop(header);
+        root.setCenter(mainContent);
+        root.setBottom(footer);
     }
 
     public BorderPane getView() {

@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.event.*;
 
 public class Tools {
 
@@ -28,7 +29,29 @@ public class Tools {
         return botoes;
     }
 
-    public static void criarHeader(BorderPane root, String title, String style, int padding, List<Button> botoes) {
+    public static Button criarBotao(String texto, EventHandler<ActionEvent> acao) {
+        Button botao = new Button(texto);
+        botao.setOnAction(acao);
+        return botao;
+    }
+
+    public static List<Button> criarBotoes(String[] nomes, List<EventHandler<ActionEvent>> acoes) {
+        List<Button> botoes = new ArrayList<>();
+
+        if (nomes.length != acoes.size()) {
+            throw new IllegalArgumentException("O número de nomes e ações deve ser igual.");
+        }
+
+        for (int i = 0; i < nomes.length; i++) {
+            Button botao = new Button(nomes[i]);
+            botao.setOnAction(acoes.get(i));
+            botoes.add(botao);
+        }
+
+        return botoes;
+    }
+
+    public static HBox criarHeader(String title, String style, int padding, List<Button> botoes) {
         Label titleLabel = new Label(title);
         titleLabel.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
 
@@ -46,19 +69,27 @@ public class Tools {
         header.getChildren().addAll(botoes);
 
         BorderPane.setMargin(header, new Insets(0, 0, 5, 0));
-        root.setTop(header);
+
+        return header;
     }
 
-    public static void criarMain(BorderPane root) {
+    public static VBox nav() {
         VBox nav = new VBox();
         nav.setStyle("-fx-background-color: #FFA07A;");
         nav.setPadding(new Insets(10));
         nav.getChildren().add(new Label("Navegação"));
+        return nav;
+    }
 
+    public static VBox workspace() {
         VBox workspace = new VBox();
         workspace.setStyle("-fx-background-color: #98FB98;");
         workspace.setPadding(new Insets(10));
         workspace.getChildren().add(new Label("Workspace"));
+        return workspace;
+    }
+
+    public static HBox criarMain(VBox nav, VBox workspace) {
 
         HBox mainContent = new HBox(10);
         mainContent.getChildren().addAll(nav, workspace);
@@ -69,15 +100,15 @@ public class Tools {
             workspace.setPrefWidth(width * 0.7);
         });
 
-        root.setCenter(mainContent);
+        return mainContent;
     }
 
-    public static void criarFooter(BorderPane root) {
+    public static Label criarFooter() {
         Label footer = new Label("FOOTER");
         footer.setStyle("-fx-background-color: #555555; -fx-text-fill: white; -fx-font-size: 14px;");
         footer.setPadding(new Insets(10));
         footer.setMaxWidth(Double.MAX_VALUE);
         BorderPane.setMargin(footer, new Insets(5, 0, 0, 0));
-        root.setBottom(footer);
+        return footer;
     }
 }

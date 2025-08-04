@@ -19,16 +19,6 @@ public class Tools {
     // root.setTop(header);
     // }
 
-    public static List<Button> Buttons(String... names) {
-        List<Button> botoes = new ArrayList<>();
-
-        for (String name : names) {
-            botoes.add(new Button(name));
-        }
-
-        return botoes;
-    }
-
     public static Button criarBotao(String texto, EventHandler<ActionEvent> acao) {
         Button botao = new Button(texto);
         botao.setOnAction(acao);

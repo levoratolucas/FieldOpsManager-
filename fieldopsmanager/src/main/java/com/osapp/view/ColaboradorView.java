@@ -1,5 +1,6 @@
 package com.osapp.view;
 
+import com.osapp.util.ButtonActions;
 import com.osapp.controller.ColaboradorController;
 import com.osapp.model.Colaborador;
 
@@ -18,6 +19,8 @@ public class ColaboradorView {
     private ObservableList<Colaborador> colaboradores;
 
     private ColaboradorController controller;
+
+    
 
     public ColaboradorView() {
         this.controller = new ColaboradorController();
@@ -39,33 +42,15 @@ public class ColaboradorView {
 
         HBox buttonBox = new HBox(10, addBtn, editBtn, deleteBtn);
 
-        addBtn.setOnAction(e -> {
-            if (!nomeInput.getText().isEmpty() && !reInput.getText().isEmpty()) {
-                controller.adicionarColaborador(nomeInput.getText(), reInput.getText());
-                showAlert("Sucesso", "Colaborador adicionado com sucesso!", Alert.AlertType.INFORMATION);
-                atualizarTabela();
-            } else {
-                showAlert("Erro", "Preencha todos os campos!", Alert.AlertType.ERROR);
-            }
-        });
+        addBtn.setOnAction(e -> ButtonActions.act(nomeInput, reInput, controller));
 
-        editBtn.setOnAction(e -> {
-            Colaborador selecionado = table.getSelectionModel().getSelectedItem();
-            if (selecionado != null) {
-                selecionado.setName(nomeInput.getText());
-                selecionado.setRe(reInput.getText());
-                controller.atualizarColaborador(selecionado); // método precisa existir no controller
-                showAlert("Sucesso", "Colaborador atualizado com sucesso!", Alert.AlertType.INFORMATION);
-                atualizarTabela();
-            } else {
-                showAlert("Atenção", "Selecione um colaborador para editar", Alert.AlertType.WARNING);
-            }
-        });
+        editBtn.setOnAction(e -> ButtonActions.act2(nomeInput, reInput, controller, table, () -> atualizarTabela()));
 
         deleteBtn.setOnAction(e -> {
             Colaborador selecionado = table.getSelectionModel().getSelectedItem();
             if (selecionado != null) {
-                Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Deseja realmente excluir?", ButtonType.YES, ButtonType.NO);
+                Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Deseja realmente excluir?", ButtonType.YES,
+                        ButtonType.NO);
                 confirm.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.YES) {
                         controller.deletarColaborador(selecionado.getId());

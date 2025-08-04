@@ -11,7 +11,7 @@ public class LayoutDidatico {
     public LayoutDidatico() {
         root = new BorderPane();
 
-        List<Button> botoes = Tools.Buttons("btn1", "btn2", "btn3", "btn4");
+        List<Button> botoes = Tools.Buttons("btn1", "btn2", "btn3", "btn4","btn1", "btn2", "btn3", "btn4");
 
         String estilo = "-fx-background-color: #6495ED;";
 

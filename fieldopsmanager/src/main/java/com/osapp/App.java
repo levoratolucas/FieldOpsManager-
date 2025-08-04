@@ -14,13 +14,13 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         String title;
-        // ColaboradorView colaboradorView = new ColaboradorView();
-        // Scene scene = new Scene(colaboradorView.getView(), 600, 400);
-        // title = "Gestão de Colaboradores";
+        ColaboradorView colaboradorView = new ColaboradorView();
+        Scene scene = new Scene(colaboradorView.getView(), 600, 400);
+        title = "Gestão de Colaboradores";
 
-        LayoutDidatico layoutDidatico = new LayoutDidatico();
-        Scene scene = new Scene(layoutDidatico.getView(), 600, 400);
-        title = "teste view de aprendizado";
+        // LayoutDidatico layoutDidatico = new LayoutDidatico();
+        // Scene scene = new Scene(layoutDidatico.getView(), 600, 400);
+        // title = "teste view de aprendizado";
 
         Image icon = new Image(getClass().getResourceAsStream("/imag/logo_.png"));
         primaryStage.getIcons().add(icon);

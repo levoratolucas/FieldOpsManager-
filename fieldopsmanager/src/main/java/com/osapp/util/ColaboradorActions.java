@@ -6,7 +6,7 @@ import com.osapp.model.Colaborador;
 import com.osapp.controller.ColaboradorController;
 import com.osapp.view.ColaboradorView;
 
-public class ActionsColaborador {
+public class ColaboradorActions {
     public static TextField nomeInput;
     public static TextField reInput;
     public static TableView<Colaborador> table;

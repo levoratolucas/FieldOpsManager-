@@ -2,7 +2,7 @@ package com.osapp.view;
 
 import com.osapp.controller.ColaboradorController;
 import com.osapp.model.Colaborador;
-import com.osapp.util.ActionsColaborador;
+import com.osapp.util.ColaboradorActions;
 import com.osapp.util.Tools;
 
 import javafx.collections.FXCollections;
@@ -62,21 +62,21 @@ public class ColaboradorView {
             }
         });
 
-        ActionsColaborador.nomeInput = nomeInput;
-        ActionsColaborador.reInput = reInput;
-        ActionsColaborador.table = table;
-        ActionsColaborador.controller = controller;
-        ActionsColaborador.atualizarTabela = this::atualizarTabela;
+        ColaboradorActions.nomeInput = nomeInput;
+        ColaboradorActions.reInput = reInput;
+        ColaboradorActions.table = table;
+        ColaboradorActions.controller = controller;
+        ColaboradorActions.atualizarTabela = this::atualizarTabela;
 
         String[] nomes = { "Adicionar", "Editar", "Excluir" };
 
         List<EventHandler<ActionEvent>> acoes = List.of(
-                e -> ActionsColaborador.add(),
-                e -> ActionsColaborador.edit(),
-                e -> ActionsColaborador.delete());
+                e -> ColaboradorActions.add(),
+                e -> ColaboradorActions.edit(),
+                e -> ColaboradorActions.delete());
 
         List<Button> btn = Tools.criarBotoes(nomes, acoes);
-        
+
         HBox buttonBox = new HBox(10, btn.get(0), btn.get(1), btn.get(2));
 
         layout.getChildren().addAll(label, nomeInput, reInput, buttonBox, table);

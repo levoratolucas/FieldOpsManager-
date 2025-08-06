@@ -1,33 +1,27 @@
 package com.osapp.controller;
 
-import com.osapp.dao.EstadoDao;
 import com.osapp.model.Estado;
+import com.osapp.service.EstadoService;
 
-import jakarta.persistence.EntityManager;
 import java.util.List;
 
-
 public class EstadoController {
-    private EstadoDao dao;
 
-    public EstadoController(EntityManager em) {
-        this.dao = new EstadoDao(em);
+    private final EstadoService service = new EstadoService();
+
+    public void adicionarEstado(String nome, String sigla) {
+        service.adicionarEstado(nome, sigla);
     }
 
-    public void adicionarEstado(String name, String sigla) {
-        Estado Estado = new Estado(name, sigla);
-        dao.salvar(Estado);
+    public List<Estado> listarEstados() {
+        return service.listarEstados();
     }
 
-    public List<Estado> listarEstadoes() {
-        return dao.listarTodos();
-    }
-
-    public Estado buscarEstadoPorId(Long id) {
-        return dao.buscarPorId(id);
+    public void atualizarEstado(Estado estado) {
+        service.atualizarEstado(estado);
     }
 
     public void deletarEstado(Long id) {
-        dao.deletar(id);
+        service.deletarEstado(id);
     }
 }

@@ -1,4 +1,5 @@
 package com.osapp.dao;
+
 import java.util.List;
 
 import com.osapp.model.Colaborador;
@@ -41,4 +42,17 @@ public class ColaboradorDao {
             em.getTransaction().commit();
         }
     }
+
+    public void atualizar(Colaborador colaborador) {
+        try {
+            em.getTransaction().begin();
+            em.merge(colaborador);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive())
+                em.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
+
 }

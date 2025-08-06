@@ -1,20 +1,21 @@
 package com.osapp.dao;
 
-import java.util.List;
-import com.osapp.model.Estado;
+import com.osapp.model.Endereco;
 import jakarta.persistence.EntityManager;
 
-public class EstadoDao {
+import java.util.List;
+
+public class EnderecoDao {
     private EntityManager em;
 
-    public EstadoDao(EntityManager em) {
+    public EnderecoDao(EntityManager em) {
         this.em = em;
     }
 
-    public void salvar(Estado estado) {
+    public void salvar(Endereco endereco) {
         try {
             em.getTransaction().begin();
-            em.persist(estado);
+            em.persist(endereco);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive())
@@ -23,18 +24,18 @@ public class EstadoDao {
         }
     }
 
-    public List<Estado> listarTodos() {
-        return em.createQuery("SELECT e FROM Estado e", Estado.class).getResultList();
+    public List<Endereco> listarTodos() {
+        return em.createQuery("SELECT e FROM Endereco e", Endereco.class).getResultList();
     }
 
-    public Estado buscarPorId(Long id) {
-        return em.find(Estado.class, id);
+    public Endereco buscarPorId(Long id) {
+        return em.find(Endereco.class, id);
     }
 
-    public void atualizar(Estado estado) {
+    public void atualizar(Endereco endereco) {
         try {
             em.getTransaction().begin();
-            em.merge(estado);
+            em.merge(endereco);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive())
@@ -44,10 +45,10 @@ public class EstadoDao {
     }
 
     public void deletar(Long id) {
-        Estado estado = em.find(Estado.class, id);
-        if (estado != null) {
+        Endereco endereco = em.find(Endereco.class, id);
+        if (endereco != null) {
             em.getTransaction().begin();
-            em.remove(estado);
+            em.remove(endereco);
             em.getTransaction().commit();
         }
     }

@@ -1,50 +1,49 @@
 package com.osapp.service;
 
-import com.osapp.dao.ColaboradorDao;
-import com.osapp.model.Colaborador;
+import com.osapp.dao.CidadeDao;
+import com.osapp.model.Cidade;
+import com.osapp.model.Estado;
 import com.osapp.util.JpaUtil;
 
 import jakarta.persistence.EntityManager;
-
 import java.util.List;
 
-public class ColaboradorService {
+public class CidadeService {
 
-    public void adicionarColaborador(String nome, String cargo) {
+    public void adicionarCidade(String nome, Estado estado) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
-            dao.salvar(new Colaborador(nome, cargo));
+            CidadeDao dao = new CidadeDao(em);
+            dao.salvar(new Cidade(nome, estado));
         } finally {
             em.close();
         }
     }
 
-    public List<Colaborador> listarColaboradores() {
+    public List<Cidade> listarCidades() {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
+            CidadeDao dao = new CidadeDao(em);
             return dao.listarTodos();
         } finally {
             em.close();
         }
     }
 
-    public void atualizarColaborador(Colaborador colaborador) {
+    public void atualizarCidade(Cidade cidade) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
-            dao.atualizar(colaborador);
-
+            CidadeDao dao = new CidadeDao(em);
+            dao.atualizar(cidade);
         } finally {
             em.close();
         }
     }
 
-    public void deletarColaborador(Long id) {
+    public void deletarCidade(Long id) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
+            CidadeDao dao = new CidadeDao(em);
             dao.deletar(id);
         } finally {
             em.close();

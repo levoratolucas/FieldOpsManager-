@@ -1,50 +1,49 @@
 package com.osapp.service;
 
-import com.osapp.dao.ColaboradorDao;
-import com.osapp.model.Colaborador;
+import com.osapp.dao.EnderecoDao;
+import com.osapp.model.Cidade;
+import com.osapp.model.Endereco;
 import com.osapp.util.JpaUtil;
 
 import jakarta.persistence.EntityManager;
-
 import java.util.List;
 
-public class ColaboradorService {
+public class EnderecoService {
 
-    public void adicionarColaborador(String nome, String cargo) {
+    public void adicionarEndereco(String rua, String bairro, String numero, Cidade cidade) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
-            dao.salvar(new Colaborador(nome, cargo));
+            EnderecoDao dao = new EnderecoDao(em);
+            dao.salvar(new Endereco(rua, bairro, numero, cidade));
         } finally {
             em.close();
         }
     }
 
-    public List<Colaborador> listarColaboradores() {
+    public List<Endereco> listarEnderecos() {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
+            EnderecoDao dao = new EnderecoDao(em);
             return dao.listarTodos();
         } finally {
             em.close();
         }
     }
 
-    public void atualizarColaborador(Colaborador colaborador) {
+    public void atualizarEndereco(Endereco endereco) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
-            dao.atualizar(colaborador);
-
+            EnderecoDao dao = new EnderecoDao(em);
+            dao.atualizar(endereco);
         } finally {
             em.close();
         }
     }
 
-    public void deletarColaborador(Long id) {
+    public void deletarEndereco(Long id) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
+            EnderecoDao dao = new EnderecoDao(em);
             dao.deletar(id);
         } finally {
             em.close();

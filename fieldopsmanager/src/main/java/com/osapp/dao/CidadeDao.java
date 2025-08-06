@@ -1,20 +1,21 @@
 package com.osapp.dao;
 
-import java.util.List;
-import com.osapp.model.Estado;
+import com.osapp.model.Cidade;
 import jakarta.persistence.EntityManager;
 
-public class EstadoDao {
+import java.util.List;
+
+public class CidadeDao {
     private EntityManager em;
 
-    public EstadoDao(EntityManager em) {
+    public CidadeDao(EntityManager em) {
         this.em = em;
     }
 
-    public void salvar(Estado estado) {
+    public void salvar(Cidade cidade) {
         try {
             em.getTransaction().begin();
-            em.persist(estado);
+            em.persist(cidade);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive())
@@ -23,18 +24,18 @@ public class EstadoDao {
         }
     }
 
-    public List<Estado> listarTodos() {
-        return em.createQuery("SELECT e FROM Estado e", Estado.class).getResultList();
+    public List<Cidade> listarTodos() {
+        return em.createQuery("SELECT c FROM Cidade c", Cidade.class).getResultList();
     }
 
-    public Estado buscarPorId(Long id) {
-        return em.find(Estado.class, id);
+    public Cidade buscarPorId(Long id) {
+        return em.find(Cidade.class, id);
     }
 
-    public void atualizar(Estado estado) {
+    public void atualizar(Cidade cidade) {
         try {
             em.getTransaction().begin();
-            em.merge(estado);
+            em.merge(cidade);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive())
@@ -44,10 +45,10 @@ public class EstadoDao {
     }
 
     public void deletar(Long id) {
-        Estado estado = em.find(Estado.class, id);
-        if (estado != null) {
+        Cidade cidade = em.find(Cidade.class, id);
+        if (cidade != null) {
             em.getTransaction().begin();
-            em.remove(estado);
+            em.remove(cidade);
             em.getTransaction().commit();
         }
     }

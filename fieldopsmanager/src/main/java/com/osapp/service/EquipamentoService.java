@@ -1,50 +1,48 @@
 package com.osapp.service;
 
-import com.osapp.dao.ColaboradorDao;
-import com.osapp.model.Colaborador;
+import com.osapp.dao.EquipamentoDao;
+import com.osapp.model.Equipamento;
 import com.osapp.util.JpaUtil;
 
 import jakarta.persistence.EntityManager;
-
 import java.util.List;
 
-public class ColaboradorService {
+public class EquipamentoService {
 
-    public void adicionarColaborador(String nome, String cargo) {
+    public void adicionarEquipamento(String name, String tipo) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
-            dao.salvar(new Colaborador(nome, cargo));
+            EquipamentoDao dao = new EquipamentoDao(em);
+            dao.salvar(new Equipamento(name, tipo));
         } finally {
             em.close();
         }
     }
 
-    public List<Colaborador> listarColaboradores() {
+    public List<Equipamento> listarEquipamentos() {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
+            EquipamentoDao dao = new EquipamentoDao(em);
             return dao.listarTodos();
         } finally {
             em.close();
         }
     }
 
-    public void atualizarColaborador(Colaborador colaborador) {
+    public void atualizarEquipamento(Equipamento equipamento) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
-            dao.atualizar(colaborador);
-
+            EquipamentoDao dao = new EquipamentoDao(em);
+            dao.atualizar(equipamento);
         } finally {
             em.close();
         }
     }
 
-    public void deletarColaborador(Long id) {
+    public void deletarEquipamento(Long id) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
+            EquipamentoDao dao = new EquipamentoDao(em);
             dao.deletar(id);
         } finally {
             em.close();

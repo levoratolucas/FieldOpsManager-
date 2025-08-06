@@ -1,50 +1,48 @@
 package com.osapp.service;
 
-import com.osapp.dao.ColaboradorDao;
-import com.osapp.model.Colaborador;
+import com.osapp.dao.ClienteDao;
+import com.osapp.model.Cliente;
 import com.osapp.util.JpaUtil;
-
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
-public class ColaboradorService {
+public class ClienteService {
 
-    public void adicionarColaborador(String nome, String cargo) {
+    public void adicionarCliente(String name, Cliente cliente) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
-            dao.salvar(new Colaborador(nome, cargo));
+            ClienteDao dao = new ClienteDao(em);
+            dao.salvar(cliente);
         } finally {
             em.close();
         }
     }
 
-    public List<Colaborador> listarColaboradores() {
+    public List<Cliente> listarClientes() {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
+            ClienteDao dao = new ClienteDao(em);
             return dao.listarTodos();
         } finally {
             em.close();
         }
     }
 
-    public void atualizarColaborador(Colaborador colaborador) {
+    public void atualizarCliente(Cliente cliente) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
-            dao.atualizar(colaborador);
-
+            ClienteDao dao = new ClienteDao(em);
+            dao.atualizar(cliente);
         } finally {
             em.close();
         }
     }
 
-    public void deletarColaborador(Long id) {
+    public void deletarCliente(Long id) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            ColaboradorDao dao = new ColaboradorDao(em);
+            ClienteDao dao = new ClienteDao(em);
             dao.deletar(id);
         } finally {
             em.close();

@@ -2,6 +2,7 @@ package com.osapp.controller;
 
 import com.osapp.model.Cidade;
 import com.osapp.model.Endereco;
+import com.osapp.model.Colaborador;
 import com.osapp.service.EnderecoService;
 
 import java.util.List;
@@ -24,5 +25,8 @@ public class EnderecoController {
 
     public void deletarEndereco(Long id) {
         service.deletarEndereco(id);
+    }
+    public Endereco getEndereco(Long id){
+        return service.getEndereco(id);
     }
 }

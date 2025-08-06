@@ -1,7 +1,9 @@
 package com.osapp.service;
 
+import com.osapp.dao.ColaboradorDao;
 import com.osapp.dao.EnderecoDao;
 import com.osapp.model.Cidade;
+import com.osapp.model.Colaborador;
 import com.osapp.model.Endereco;
 import com.osapp.util.JpaUtil;
 
@@ -48,5 +50,16 @@ public class EnderecoService {
         } finally {
             em.close();
         }
+    }
+    public Endereco getEndereco(Long id) {
+        EntityManager em = JpaUtil.getEntityManager();
+        Endereco endereco;
+        try {
+            EnderecoDao dao = new EnderecoDao(em);
+            endereco = dao.buscarPorId(id);
+        } finally {
+            em.close();
+        }
+        return endereco;
     }
 }

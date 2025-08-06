@@ -10,7 +10,7 @@ public class MenuPrincipal {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void start(String[] args) {
+    public void menu() {
         CidadeController cidadeController = new CidadeController();
         ClienteController clienteController = new ClienteController();
         ColaboradorController colaboradorController = new ColaboradorController();
@@ -18,109 +18,98 @@ public class MenuPrincipal {
         EnderecoController enderecoController = new EnderecoController();
         EquipamentoController equipamentoController = new EquipamentoController();
         EstadoController estadoController = new EstadoController();
-        OSController osController = new OSController();
+        OsController osController = new OsController();
         ScriptsController scriptsController = new ScriptsController();
 
-
+        // Cadastro da Ordem de Serviço
         System.out.println("=== Cadastro de Ordem de Serviço ===");
+        System.out.println("=== Qual o ID do colaborador? ===");
 
-        // 1. Escolher ou cadastrar cliente
-        Cliente cliente = escolherOuCadastrarCliente(clienteController);
+        List<Colaborador> colaboradores = colaboradorController.listarColaboradores();
 
-        // 2. Escolher ou cadastrar equipamento
-        Equipamento equipamento = escolherOuCadastrarEquipamento(equipamentoController);
+        colaboradores.forEach(c -> nameId(c.getName(), c.getId(), "Colaborador"));
 
-        // 3. Inserir nome e comentários da OS
-        System.out.print("Digite um nome para a OS: ");
-        String nomeOs = scanner.nextLine();
+        String csIdStr = scanner.nextLine();
 
-        System.out.print("Digite os comentários da OS: ");
-        String comentarios = scanner.nextLine();
+        try {
+            Long csId = Long.parseLong(csIdStr); // Conversão correta
+            Colaborador cs = colaboradorController.getColaborador(csId);
 
-        // 4. Colaborador fixo (id = 1)
-        Colaborador colaborador = colaboradorController.buscarPorId(1L);
-        if (colaborador == null) {
-            System.out.println("Colaborador com ID 1 não encontrado. Verifique o banco de dados.");
-            return;
-        }
-
-        // 5. Criar e salvar OS
-        OS os = new OS(nomeOs, comentarios, cliente, colaborador);
-        osController.adicionarOS(os);
-
-        // 6. Adicionar script para o equipamento na OS
-        System.out.println("Digite o script (pode colar o conteúdo):");
-        String script = scanner.nextLine();
-
-        System.out.println("Digite um comentário sobre o script:");
-        String comentarioScript = scanner.nextLine();
-
-        Scripts scripts = new Scripts(script, comentarioScript, equipamento, os);
-        scriptsController.adicionarScripts(scripts);
-
-        System.out.println("Ordem de serviço cadastrada com sucesso!");
-    }
-
-    private static Cliente escolherOuCadastrarCliente(ClienteController controller) {
-        System.out.println("\nDeseja (1) Escolher cliente existente ou (2) Cadastrar novo?");
-        int opcao = Integer.parseInt(scanner.nextLine());
-
-        if (opcao == 1) {
-            List<Cliente> clientes = controller.listarClientes();
-            if (clientes.isEmpty()) {
-                System.out.println("Nenhum cliente cadastrado. Será necessário cadastrar um.");
-                return cadastrarCliente(controller);
+            if (cs != null) {
+                nameId(cs.getName(), cs.getId(), "Colaborador");
+            } else {
+                System.out.println("Colaborador com ID " + csId + " não encontrado.");
+                System.out.println("Cadastre um novo Colaborador");
+                cadastroColaborador(colaboradorController);
             }
-            clientes.forEach(c -> System.out.println(c.getId() + " - " + c.getName()));
-            System.out.print("Digite o ID do cliente: ");
-            Long id = Long.parseLong(scanner.nextLine());
-            return controller.buscarPorId(id);
-        } else {
-            return cadastrarCliente(controller);
+
+        } catch (NumberFormatException e) {
+            System.out.println("ID inválido! Digite um número.");
+        }
+
+        // Selecionar cliente
+        System.out.println("Qual o Cliente? Selecione pelo ID:");
+        List<Cliente> clientes = clienteController.listarClientes();
+        clientes.forEach(cliente -> nameId(cliente.getName(), cliente.getId(), "Cliente"));
+
+        String clienteIdStr = scanner.nextLine();
+        try {
+            Long clienteId = Long.parseLong(clienteIdStr);
+            // Cliente cliente = clienteController.getCliente(clienteId);
+            // if (cliente != null) {
+            //     nameId(cliente.getName(), cliente.getId(), "Cliente");
+            // } else {
+            //     System.out.println("Cliente com ID " + clienteId + " não encontrado.");
+            //     // Aqui você pode chamar um método para cadastrar cliente, se quiser
+            // }
+        } catch (NumberFormatException e) {
+            System.out.println("ID inválido para cliente.");
+        }
+
+        // Continue daqui para cadastrar OS, equipamentos, etc.
+    }
+
+    private void cadastroColaborador(ColaboradorController controller) {
+        String name;
+        String RE;
+        String confirmado;
+        do {
+            System.out.println("Qual o Nome do Colaborador?");
+            name = scanner.nextLine();
+            System.out.println("Qual o RE?");
+            RE = scanner.nextLine();
+            System.out.println("Confirmar colaborador:");
+            System.out.println("Nome: " + name);
+            System.out.println("RE: " + RE);
+            System.out.println("Correto? (S)(N)");
+            confirmado = scanner.nextLine();
+        } while (!confirmado.equalsIgnoreCase("S"));
+
+        try {
+            controller.adicionarColaborador(name, RE);
+            System.out.println("Cadastrado com sucesso!!");
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar colaborador: " + e.getMessage());
         }
     }
 
-    private static Cliente cadastrarCliente(ClienteController controller) {
-        System.out.print("Nome do cliente: ");
-        String nome = scanner.nextLine();
-
-        // Endereço fixo temporário ou você pode estender aqui
-        Endereco endereco = new Endereco("Rua Exemplo", "123", null); // cidade null por enquanto
-        Cliente cliente = new Cliente(nome, endereco);
-        controller.adicionarCliente(cliente);
-
-        return cliente;
+    private void nameId(String name, Long id, String tipo) {
+        System.out.println(tipo + " selecionado: " + name + " | ID: " + id);
     }
 
-    private static Equipamento escolherOuCadastrarEquipamento(EquipamentoController controller) {
-        System.out.println("\nDeseja (1) Escolher equipamento existente ou (2) Cadastrar novo?");
-        int opcao = Integer.parseInt(scanner.nextLine());
-
-        if (opcao == 1) {
-            List<Equipamento> equipamentos = controller.listarEquipamentos();
-            if (equipamentos.isEmpty()) {
-                System.out.println("Nenhum equipamento cadastrado. Será necessário cadastrar um.");
-                return cadastrarEquipamento(controller);
-            }
-            equipamentos.forEach(e -> System.out.println(e.getId() + " - " + e.getName()));
-            System.out.print("Digite o ID do equipamento: ");
-            Long id = Long.parseLong(scanner.nextLine());
-            return controller.buscarPorId(id);
-        } else {
-            return cadastrarEquipamento(controller);
-        }
+    private void cadastrarEndereco() {
+        // Em desenvolvimento
     }
 
-    private static Equipamento cadastrarEquipamento(EquipamentoController controller) {
-        System.out.print("Nome do equipamento: ");
-        String nome = scanner.nextLine();
+    private void cadastrarCliente(ClienteController clienteController, EnderecoController enderecoController,
+                                   CidadeController cidadeController, EstadoController estadoController) {
+        String name;
+        String OSNumb;
+        System.out.println("Qual o nome do Cliente?");
+        name = scanner.nextLine();
+        System.out.println("Qual o número da OS?");
+        OSNumb = scanner.nextLine();
 
-        System.out.print("Tipo do equipamento: ");
-        String tipo = scanner.nextLine();
-
-        Equipamento equipamento = new Equipamento(nome, tipo);
-        controller.adicionarEquipamento(equipamento);
-
-        return equipamento;
+        // Completar lógica de cadastro de cliente aqui
     }
 }

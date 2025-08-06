@@ -24,4 +24,7 @@ public class ColaboradorController {
     public void deletarColaborador(Long id) {
         service.deletarColaborador(id);
     }
+    public Colaborador getColaborador(Long id){
+        return service.getColaborador(id);
+    }
 }

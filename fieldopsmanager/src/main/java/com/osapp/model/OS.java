@@ -9,7 +9,7 @@ public class OS {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String OS;
 
     @Lob
     private String comentarios;
@@ -24,8 +24,8 @@ public class OS {
 
     public OS() {}
 
-    public OS(String name, String comentarios, Cliente cliente, Colaborador colaborador) {
-        this.name = name;
+    public OS(String OS, String comentarios, Cliente cliente, Colaborador colaborador) {
+        this.OS = OS;
         this.comentarios = comentarios;
         this.cliente = cliente;
         this.colaborador = colaborador;
@@ -40,12 +40,12 @@ public class OS {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getOS() {
+        return OS;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String OS) {
+        this.OS = OS;
     }
 
     public String getComentarios() {

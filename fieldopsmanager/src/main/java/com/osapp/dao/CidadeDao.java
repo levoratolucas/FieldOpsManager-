@@ -12,16 +12,18 @@ public class CidadeDao {
         this.em = em;
     }
 
-    public void salvar(Cidade cidade) {
+    public Cidade salvar(Cidade cidade) {
         try {
             em.getTransaction().begin();
             em.persist(cidade);
             em.getTransaction().commit();
+           
         } catch (Exception e) {
             if (em.getTransaction().isActive())
                 em.getTransaction().rollback();
             e.printStackTrace();
         }
+        return cidade;
     }
 
     public List<Cidade> listarTodos() {

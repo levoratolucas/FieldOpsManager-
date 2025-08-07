@@ -24,4 +24,8 @@ public class EstadoController {
     public void deletarEstado(Long id) {
         service.deletarEstado(id);
     }
+
+    public Estado getEstado(Long id){
+        return service.getEstado(id);
+    }
 }

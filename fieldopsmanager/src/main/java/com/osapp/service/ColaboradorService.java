@@ -53,13 +53,11 @@ public class ColaboradorService {
 
     public Colaborador getColaborador(Long id) {
         EntityManager em = JpaUtil.getEntityManager();
-        Colaborador colaborador;
         try {
             ColaboradorDao dao = new ColaboradorDao(em);
-            colaborador = dao.buscarPorId(id);
+            return dao.buscarPorId(id);
         } finally {
             em.close();
         }
-        return colaborador;
     }
 }

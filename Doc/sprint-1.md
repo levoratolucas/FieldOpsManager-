@@ -1,5 +1,9 @@
 # 🏁 Sprint 1 - FieldOpsManager  
-📅 Período: 28/07/2025 a 10/08/2025
+📅 Período: 28/07/2025 a 10/08/2025  
+✅ **Status: Concluída com sucesso**  
+🚀 **Sprint 2 iniciada antecipadamente**
+
+---
 
 ## 🎯 Objetivo da Sprint
 Estabelecer a fundação do projeto FieldOpsManager, com foco em modelagem das entidades principais, estrutura modular por camadas e persistência de dados via JPA/Hibernate. A sprint visa garantir o funcionamento básico de cadastro e leitura no banco de dados, além de definir uma base sólida para as próximas fases.
@@ -14,6 +18,7 @@ Estabelecer a fundação do projeto FieldOpsManager, com foco em modelagem das e
   - `model` – entidades JPA
   - `dao` – acesso a dados (Data Access Object)
   - `controller` – camada de lógica de negócio
+  - `service` – camada de regras de negócio
   - `util` – utilitários do sistema
   - `App` – ponto de entrada para testes
 
@@ -21,7 +26,7 @@ Estabelecer a fundação do projeto FieldOpsManager, com foco em modelagem das e
 
 ## 🧱 Entidades Criadas
 
-### Modelagem JPA
+### ✅ Modelagem JPA
 Todas as entidades principais foram criadas com anotações JPA:
 
 - [x] Cidade
@@ -34,19 +39,21 @@ Todas as entidades principais foram criadas com anotações JPA:
 - [x] OS
 - [x] Scripts
 
-### DAO e Controller
+---
 
-| Entidade     | DAO         | Controller   |
-|--------------|-------------|--------------|
-| Cidade       | ❌           | ❌            |
-| Cliente      | ❌           | ❌            |
-| Colaborador  | ✅ `ColaboradorDao.java` | ✅ `ColaboradorController.java` |
-| Contato      | ❌           | ❌            |
-| Endereco     | ❌           | ❌            |
-| Equipamento  | ❌           | ❌            |
-| Estado       | ❌           | ❌            |
-| OS           | ❌           | ❌            |
-| Scripts      | ❌           | ❌            |
+## ✅ DAO, Controller e Service
+
+| Entidade     | DAO                    | Controller              | Service                 |
+|--------------|------------------------|--------------------------|--------------------------|
+| Cidade       | ✅ `CidadeDao.java`       | ✅ `CidadeController.java`  | ✅ `CidadeService.java`     |
+| Cliente      | ✅ `ClienteDao.java`      | ✅ `ClienteController.java` | ✅ `ClienteService.java`    |
+| Colaborador  | ✅ `ColaboradorDao.java`  | ✅ `ColaboradorController.java` | ✅ `ColaboradorService.java` |
+| Contato      | ✅ `ContatoDao.java`      | ✅ `ContatoController.java` | ✅ `ContatoService.java`    |
+| Endereco     | ✅ `EnderecoDao.java`     | ✅ `EnderecoController.java` | ✅ `EnderecoService.java`   |
+| Equipamento  | ✅ `EquipamentoDao.java`  | ✅ `EquipamentoController.java` | ✅ `EquipamentoService.java` |
+| Estado       | ✅ `EstadoDao.java`       | ✅ `EstadoController.java`  | ✅ `EstadoService.java`     |
+| OS           | ✅ `OSDao.java`           | ✅ `OSController.java`      | ✅ `OSService.java`         |
+| Scripts      | ✅ `ScriptDao.java`       | ✅ `ScriptController.java`  | ✅ `ScriptService.java`     |
 
 ---
 
@@ -79,14 +86,16 @@ Todas as entidades principais foram criadas com anotações JPA:
   - Camada de exibição para inserção de colaboradores via controller
 
 ---
-## 🟡 Em Progresso
 
-- DAO e Controller das demais entidades
-- Testes e integração com as outras entidades do sistema
+## ✅ Todos os módulos concluídos
+
+- Todas as entidades possuem DAO, Controller e Service
+- Camadas bem organizadas e testadas
+- Preparação completa para integração da camada visual
 
 ---
 
-## ⚠️ Itens de Segurança
+## 🔒 Itens de Segurança
 
 - Credenciais e arquivos sensíveis **não estão versionados**
 - Informações como URL, usuário e senha do banco ficam no `config.properties` (fora do Git)
@@ -111,7 +120,7 @@ Todas as entidades principais foram criadas com anotações JPA:
 
 ## 📍 Próximos Passos (Sprint 2)
 
-- Iniciar JavaFX (interface gráfica)
+- ✅ Início antecipado da Sprint 2
+- Iniciar desenvolvimento da interface gráfica com JavaFX
 - Adicionar autenticação de usuários
 - Considerar uso de MongoDB para logs/auditoria
-

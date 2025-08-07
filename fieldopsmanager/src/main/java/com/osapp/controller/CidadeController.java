@@ -10,8 +10,8 @@ public class CidadeController {
 
     private final CidadeService service = new CidadeService();
 
-    public void adicionarCidade(String nome, Estado estado) {
-        service.adicionarCidade(nome, estado);
+    public Cidade adicionarCidade(String nome, Estado estado) {
+       return service.adicionarCidade(nome, estado);
     }
 
     public List<Cidade> listarCidades() {
@@ -24,5 +24,9 @@ public class CidadeController {
 
     public void deletarCidade(Long id) {
         service.deletarCidade(id);
+    }
+
+    public Cidade getCidade(Long id) {
+        return service.getCidade(id);
     }
 }

@@ -10,11 +10,11 @@ import java.util.List;
 
 public class CidadeService {
 
-    public void adicionarCidade(String nome, Estado estado) {
+    public Cidade adicionarCidade(String nome, Estado estado) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
             CidadeDao dao = new CidadeDao(em);
-            dao.salvar(new Cidade(nome, estado));
+           return dao.salvar(new Cidade(nome, estado));
         } finally {
             em.close();
         }
@@ -35,6 +35,17 @@ public class CidadeService {
         try {
             CidadeDao dao = new CidadeDao(em);
             dao.atualizar(cidade);
+        } finally {
+            em.close();
+        }
+    }
+
+    public Cidade getCidade(Long id) {
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            CidadeDao dao = new CidadeDao(em);
+
+            return dao.buscarPorId(id);
         } finally {
             em.close();
         }

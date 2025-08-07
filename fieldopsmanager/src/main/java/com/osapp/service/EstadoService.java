@@ -48,4 +48,14 @@ public class EstadoService {
             em.close();
         }
     }
+
+    public Estado getEstado(Long id) {
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            EstadoDao dao = new EstadoDao(em);
+           return dao.buscarPorId(id);
+        } finally {
+            em.close();
+        }
+    }
 }

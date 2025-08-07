@@ -14,15 +14,21 @@ Este projeto é parte de um estudo pessoal com foco em:
 ---
 
 ## 🚀 Funcionalidades (em progresso)
+ 
+- [x] Interface gráfica com JavaFX  
+- [ ] Autenticação de usuários  
+- [ ] Logs e histórico de ações (MongoDB)  
+- [ ] Relatórios e filtros de ordens de serviço  
+
+---
+
+## ✅ Funcionalidades Concluídas
 
 - [x] Modelagem de dados orientada a objetos  
 - [x] Projeto Java com estrutura modular (camadas: `model`, `dao`, `controller`, `util`)  
 - [x] CRUD funcional via terminal com persistência em banco (JPA/Hibernate)  
 - [x] Relacionamentos entre entidades  
 - [x] Interface gráfica com JavaFX  
-- [ ] Autenticação de usuários  
-- [ ] Logs e histórico de ações (MongoDB)  
-- [ ] Relatórios e filtros de ordens de serviço  
 
 ---
 

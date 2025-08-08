@@ -2,7 +2,6 @@ package com.osapp.controller;
 
 import com.osapp.model.Cidade;
 import com.osapp.model.Endereco;
-import com.osapp.model.Colaborador;
 import com.osapp.service.EnderecoService;
 
 import java.util.List;

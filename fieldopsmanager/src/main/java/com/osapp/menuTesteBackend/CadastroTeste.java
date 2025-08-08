@@ -13,14 +13,14 @@ public class CadastroTeste {
     public static final Scanner scanner = new Scanner(System.in);
 
     public static CidadeController cidadeController = new CidadeController();
-public static     ClienteController clienteController = new ClienteController();
-public static     ColaboradorController colaboradorController = new ColaboradorController();
-public static     ContatoController contatoController = new ContatoController();
-public static     EnderecoController enderecoController = new EnderecoController();
-public static     EquipamentoController equipamentoController = new EquipamentoController();
-public static     EstadoController estadoController = new EstadoController();
-public static     OsController osController = new OsController();
-public static     ScriptsController scriptsController = new ScriptsController();
+    public static ClienteController clienteController = new ClienteController();
+    public static ColaboradorController colaboradorController = new ColaboradorController();
+    public static ContatoController contatoController = new ContatoController();
+    public static EnderecoController enderecoController = new EnderecoController();
+    public static EquipamentoController equipamentoController = new EquipamentoController();
+    public static EstadoController estadoController = new EstadoController();
+    public static OsController osController = new OsController();
+    public static ScriptsController scriptsController = new ScriptsController();
 
     public static void cadastrarEndereco(EnderecoController enderecoController, CidadeController cidadeController,
             EstadoController estadoController) {
@@ -39,9 +39,11 @@ public static     ScriptsController scriptsController = new ScriptsController();
 
             List<Cidade> cidades = cidadeController.listarCidades();
             System.out.println("Qual cidade da lista?");
-            cidades.forEach(c -> System.out.println(c.getId() + " - " + c.getName()));
+            ListarTeste.listarCidades(cidades);
 
             String idCidade = scanner.nextLine();
+
+
 
             try {
                 Long idLong = Long.parseLong(idCidade);
@@ -86,13 +88,14 @@ public static     ScriptsController scriptsController = new ScriptsController();
 
     }
 
+    
+
     public static Cidade cadastrarCidade(CidadeController cidadeController, EstadoController estadoController) {
         System.out.println("Qual o nome da cidade? ");
         String name = scanner.nextLine();
 
         // Lista os estados disponíveis
-        List<Estado> estados = estadoController.listarEstados();
-        estados.forEach(e -> System.out.println(e.getId() + " - " + e.getName() + " - " + e.getSigla()));
+        ListarTeste.listarEstados(estadoController.listarEstados());
 
         Estado estado = null;
 
@@ -108,11 +111,8 @@ public static     ScriptsController scriptsController = new ScriptsController();
                     System.out.println("Estado não encontrado. Deseja cadastrar um novo estado? (s/n)");
                     String resposta = scanner.nextLine();
                     if (resposta.equalsIgnoreCase("s")) {
-                        cadastrarEstado(estadoController);
-                        // Atualiza a lista de estados
-                        estados = estadoController.listarEstados();
-                        estados.forEach(
-                                e -> System.out.println(e.getId() + " - " + e.getName() + " - " + e.getSigla()));
+                        cadastrarEstado(estadoController);                        
+                        ListarTeste.listarEstados(estadoController.listarEstados());
                     }
                 }
             } catch (NumberFormatException e) {

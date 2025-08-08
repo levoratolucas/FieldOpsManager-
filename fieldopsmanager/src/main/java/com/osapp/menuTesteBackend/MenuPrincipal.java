@@ -27,7 +27,7 @@ public class MenuPrincipal {
 
         List<Colaborador> colaboradores = colaboradorController.listarColaboradores();
 
-        colaboradores.forEach(c -> nameId(c.getName(), c.getId(), "Colaborador"));
+        ListarTeste.listarColaboradores(colaboradores);
 
         String csIdStr = scanner.nextLine();
 
@@ -36,7 +36,7 @@ public class MenuPrincipal {
             Colaborador cs = colaboradorController.getColaborador(csId);
 
             if (cs != null) {
-                nameId(cs.getName(), cs.getId(), "Colaborador");
+                 System.out.println(cs.getId()+"- Nome: "+cs.getName()+" RE: "+cs.getRe());
             } else {
                 System.out.println("Colaborador com ID " + csId + " não encontrado.");
                 System.out.println("Cadastre um novo Colaborador");
@@ -50,7 +50,8 @@ public class MenuPrincipal {
         // Selecionar cliente
         System.out.println("Qual o Cliente? Selecione pelo ID:");
         List<Cliente> clientes = clienteController.listarClientes();
-        clientes.forEach(cliente -> nameId(cliente.getName(), cliente.getId(), "Cliente"));
+
+        ListarTeste.listarClientes(clientes);
 
         // String clienteIdStr = scanner.nextLine();
         try {
@@ -73,8 +74,6 @@ public class MenuPrincipal {
         CadastroTeste.cadastrarEndereco(enderecoController, cidadeController, estadoController);
     }
 
-    private void nameId(String name, Long id, String tipo) {
-        System.out.println(tipo + " selecionado: " + name + " | ID: " + id);
-    }
+    
 
 }

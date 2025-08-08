@@ -1,9 +1,7 @@
 package com.osapp.service;
 
-import com.osapp.dao.ColaboradorDao;
 import com.osapp.dao.EnderecoDao;
 import com.osapp.model.Cidade;
-import com.osapp.model.Colaborador;
 import com.osapp.model.Endereco;
 import com.osapp.util.JpaUtil;
 

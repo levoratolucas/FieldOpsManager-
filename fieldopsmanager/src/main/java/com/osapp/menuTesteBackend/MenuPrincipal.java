@@ -11,15 +11,15 @@ public class MenuPrincipal {
     private static final Scanner scanner = new Scanner(System.in);
 
     public void menu() {
-        CidadeController cidadeController = new CidadeController();
+        // CidadeController cidadeController = new CidadeController();
         ClienteController clienteController = new ClienteController();
         ColaboradorController colaboradorController = new ColaboradorController();
-        ContatoController contatoController = new ContatoController();
-        EnderecoController enderecoController = new EnderecoController();
-        EquipamentoController equipamentoController = new EquipamentoController();
-        EstadoController estadoController = new EstadoController();
-        OsController osController = new OsController();
-        ScriptsController scriptsController = new ScriptsController();
+        // ContatoController contatoController = new ContatoController();
+        // EnderecoController enderecoController = new EnderecoController();
+        // EquipamentoController equipamentoController = new EquipamentoController();
+        // EstadoController estadoController = new EstadoController();
+        // OsController osController = new OsController();
+        // ScriptsController scriptsController = new ScriptsController();
 
         // Cadastro da Ordem de Serviço
         System.out.println("=== Cadastro de Ordem de Serviço ===");
@@ -52,9 +52,9 @@ public class MenuPrincipal {
         List<Cliente> clientes = clienteController.listarClientes();
         clientes.forEach(cliente -> nameId(cliente.getName(), cliente.getId(), "Cliente"));
 
-        String clienteIdStr = scanner.nextLine();
+        // String clienteIdStr = scanner.nextLine();
         try {
-            Long clienteId = Long.parseLong(clienteIdStr);
+            // Long clienteId = Long.parseLong(clienteIdStr);
             // Cliente cliente = clienteController.getCliente(clienteId);
             // if (cliente != null) {
             // nameId(cliente.getName(), cliente.getId(), "Cliente");

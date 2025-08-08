@@ -1,10 +1,8 @@
 package com.osapp.util;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import com.osapp.model.Colaborador;
 import com.osapp.controller.ColaboradorController;
-import com.osapp.view.ColaboradorView;
 
 public class ColaboradorActions {
     public static TextField nomeInput;

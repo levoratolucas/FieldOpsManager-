@@ -78,6 +78,6 @@ public class App {
         CidadeController cidadeController = new CidadeController();
         EstadoController estadoController = new EstadoController();
         MenuPrincipal menu = new MenuPrincipal();
-        menu.cadastrarEndereco(enderecoController, cidadeController, estadoController);
+        menu.menu();
     }
 }

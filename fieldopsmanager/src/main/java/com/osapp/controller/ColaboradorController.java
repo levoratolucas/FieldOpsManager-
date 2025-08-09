@@ -27,4 +27,7 @@ public class ColaboradorController {
     public Colaborador getColaborador(Long id){
         return service.getColaborador(id);
     }
+    public void updateColaborador(Long id, String name, String RE){
+        service.updateColaborador(id, name, RE);
+    }
 }

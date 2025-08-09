@@ -39,7 +39,7 @@ public class CadastroTeste {
 
             List<Cidade> cidades = cidadeController.listarCidades();
             System.out.println("Qual cidade da lista?");
-            ListarTeste.listarCidades(cidades);
+            ListarTeste.listarCidades(cidadeController);
 
             String idCidade = scanner.nextLine();
 
@@ -95,7 +95,7 @@ public class CadastroTeste {
         String name = scanner.nextLine();
 
         // Lista os estados disponíveis
-        ListarTeste.listarEstados(estadoController.listarEstados());
+        ListarTeste.listarEstados(estadoController);
 
         Estado estado = null;
 
@@ -112,7 +112,7 @@ public class CadastroTeste {
                     String resposta = scanner.nextLine();
                     if (resposta.equalsIgnoreCase("s")) {
                         cadastrarEstado(estadoController);                        
-                        ListarTeste.listarEstados(estadoController.listarEstados());
+                        ListarTeste.listarEstados(estadoController);
                     }
                 }
             } catch (NumberFormatException e) {

@@ -40,6 +40,19 @@ public class ColaboradorService {
             em.close();
         }
     }
+    public void updateColaborador(Long id, String name, String RE) {
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            ColaboradorDao dao = new ColaboradorDao(em);
+            Colaborador colaborador = dao.buscarPorId(id);
+            colaborador.setName(name);
+            colaborador.setRe(RE);
+            dao.atualizar(colaborador);
+
+        } finally {
+            em.close();
+        }
+    }
 
     public void deletarColaborador(Long id) {
         EntityManager em = JpaUtil.getEntityManager();

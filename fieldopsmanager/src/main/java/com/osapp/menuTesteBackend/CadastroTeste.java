@@ -1,7 +1,5 @@
 package com.osapp.menuTesteBackend;
 
-import java.util.List;
-
 import java.util.Scanner;
 
 import com.osapp.controller.*;
@@ -37,7 +35,7 @@ public class CadastroTeste {
             System.out.println("Qual o número?");
             String numero = scanner.nextLine();
 
-            List<Cidade> cidades = cidadeController.listarCidades();
+            
             System.out.println("Qual cidade da lista?");
             ListarTeste.listarCidades(cidadeController);
 

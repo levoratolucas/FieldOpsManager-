@@ -67,16 +67,16 @@
 
 package com.osapp;
 
-import com.osapp.controller.CidadeController;
-import com.osapp.controller.EnderecoController;
-import com.osapp.controller.EstadoController;
+// import com.osapp.controller.CidadeController;
+// import com.osapp.controller.EnderecoController;
+// import com.osapp.controller.EstadoController;
 import com.osapp.menuTesteBackend.MenuPrincipal;
 
 public class App {
     public static void main(String[] args) {
-        EnderecoController enderecoController = new EnderecoController();
-        CidadeController cidadeController = new CidadeController();
-        EstadoController estadoController = new EstadoController();
+        // EnderecoController enderecoController = new EnderecoController();
+        // CidadeController cidadeController = new CidadeController();
+        // EstadoController estadoController = new EstadoController();
         MenuPrincipal menu = new MenuPrincipal();
         menu.menu();
     }

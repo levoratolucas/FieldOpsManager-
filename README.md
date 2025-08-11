@@ -49,19 +49,34 @@ Este projeto é parte de um estudo pessoal com foco em:
 > Desenvolver um sistema completo, realista e funcional que permita acompanhar a rotina de trabalho de um técnico de campo. A aplicação foi planejada para explorar conceitos intermediários e avançados da linguagem Java, incluindo persistência, orientação a objetos, uso de frameworks e arquitetura limpa.
 
 ---
-
-## ✅ Progresso - Sprint 1 (Julho/Agosto 2025)
+## ✅ Progresso - Sprint 1 📅 Período: 28/07/2025 a 10/08/2025 
 
 - Estrutura inicial do projeto criada no VSCode  
-- Organização de pacotes: `model`, `dao`, `controller`, `util`, `App` ,`service` ,`view`
+- Organização de pacotes: `model`, `dao`, `controller`, `util`, `App`, `service`, `view`  
 - Entidades criadas: `Cidade`, `Cliente`, `Colaborador`, `Contato`, `Endereco`, `Equipamento`, `Estado`, `OS`, `Scripts`  
 - Relacionamentos JPA definidos (`@ManyToOne`, `@OneToMany`, etc.)  
-- DAO criado para `Colaborador,Estado` com persistência, listagem, busca e remoção  
+- DAO criado para `Colaborador` e `Estado` com persistência, listagem, busca e remoção  
 - Controller para `Colaborador` com lógica de negócio separada  
 - Testes manuais no terminal com criação e leitura de dados via `App`  
-- Layout basico com javaFX `ColaboradorView` (Sprint 2 antecipado)
+- Layout básico com JavaFX em `ColaboradorView` (Sprint 2 antecipado)  
 
 ---
+
+## ✅ Progresso - Sprint 2 📅 Período: 13/08/2025 a 26/08/2025  
+
+- Desenvolvimento da interface gráfica completa do FieldOpsManager com JavaFX  
+- Implementação da tela Home com botões de navegação para as entidades principais  
+- Telas funcionais para cada entidade: Colaborador, Cliente, Cidade, Estado, Equipamento e Ordens de Serviço  
+- Funcionalidades CRUD implementadas nas views com conexão direta via JPA/Hibernate  
+- Criação da interface `FieldOpsListable` para listagem genérica de entidades  
+- Navbar dinâmica integrada em todas as telas para facilitar a navegação  
+- Validações básicas de dados implementadas antes da persistência  
+- Integração entre frontend (JavaFX) e backend (controller/service) consolidada  
+- Uso de componentes reutilizáveis e polimorfismo para redução de duplicidade no código da interface  
+- Preparação para futuras melhorias com camada DTO e aprimoramento da interface  
+
+---
+
 
 ## 🧠 Autor
 

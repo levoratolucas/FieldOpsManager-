@@ -100,4 +100,30 @@ public class Tools {
         BorderPane.setMargin(footer, new Insets(5, 0, 0, 0));
         return footer;
     }
+
+    public static List<Button> navbar(String... excluir) {
+        // Mapeamento nome -> ação
+        Map<String, Runnable> botoesAcoes = Map.of(
+                "Cidade", () -> ViewManager.mostrarCidadeView(),
+                "Cliente", () -> ViewManager.mostrarClienteView(),
+                "Colaborador", () -> ViewManager.mostrarColaboradorView(),
+                "Estado", () -> ViewManager.mostrarEstadoView(),
+                "Layout", () -> ViewManager.mostrarLayoutDidaticoView(),
+                "OS", () -> ViewManager.mostrarOsView());
+
+        // Lista com nomes que devem ser excluídos
+        List<String> excluirList = Arrays.asList(excluir);
+
+        // Filtra e cria botões
+        List<String> nomesFiltrados = botoesAcoes.keySet().stream()
+                .filter(nome -> !excluirList.contains(nome))
+                .toList();
+
+        List<EventHandler<ActionEvent>> acoes = nomesFiltrados.stream()
+                .map(nome -> (EventHandler<ActionEvent>) e -> botoesAcoes.get(nome).run())
+                .toList();
+
+        return Tools.criarBotoes(nomesFiltrados.toArray(new String[0]), acoes);
+    }
+
 }

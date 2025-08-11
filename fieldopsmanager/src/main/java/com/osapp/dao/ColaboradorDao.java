@@ -27,7 +27,7 @@ public class ColaboradorDao {
     }
 
     public List<Colaborador> listarTodos() {
-        return em.createQuery("SELECT c FROM Colaborador c", Colaborador.class).getResultList();
+        return em.createQuery("SELECT c FROM Colaborador c order by c.name", Colaborador.class).getResultList();
     }
 
     public Colaborador buscarPorId(Long id) {

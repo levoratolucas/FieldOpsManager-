@@ -2,6 +2,7 @@ package com.osapp.service;
 
 import com.osapp.dao.EnderecoDao;
 import com.osapp.model.Cidade;
+import com.osapp.model.Cliente;
 import com.osapp.model.Endereco;
 import com.osapp.util.JpaUtil;
 
@@ -10,11 +11,11 @@ import java.util.List;
 
 public class EnderecoService {
 
-    public void adicionarEndereco(String rua, String bairro, String numero, Cidade cidade) {
+    public void adicionarEndereco(String rua, String bairro, String numero, Cidade cidade, Cliente cliente) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
             EnderecoDao dao = new EnderecoDao(em);
-            dao.salvar(new Endereco(rua, bairro, numero, cidade));
+            dao.salvar(new Endereco(rua, bairro, numero, cidade, cliente));
         } finally {
             em.close();
         }

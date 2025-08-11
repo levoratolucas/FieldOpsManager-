@@ -4,18 +4,19 @@ import java.util.*;
 import com.osapp.util.Tools;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import javafx.event.*;
 
-public class LayoutDidatico {
+public class EstadoView {
     private BorderPane root;
 
-    public LayoutDidatico() {
+    public EstadoView() {
         root = new BorderPane();
 
-        List<Button> botoes = Tools.navbar("Layout");
+        List<Button> botoes = Tools.navbar("Estado");
 
         String estilo = "-fx-background-color: #6495ED;";
 
-        HBox header = Tools.criarHeader("Minha App", estilo, 10, botoes);
+        HBox header = Tools.criarHeader("EstadoView", estilo, 10, botoes);
         VBox nav = Tools.nav();
         VBox workspace = Tools.workspace();
         HBox mainContent = Tools.criarMain(nav, workspace);

@@ -77,7 +77,10 @@ public class ColaboradorView {
 
         List<Button> btn = Tools.criarBotoes(nomes, acoes);
 
-        HBox buttonBox = new HBox(10, btn.get(0), btn.get(1), btn.get(2));
+        btn.addAll(Tools.navbar("Colaborador"));
+
+        HBox buttonBox = new HBox(10);
+        buttonBox.getChildren().addAll(btn);
 
         layout.getChildren().addAll(label, nomeInput, reInput, buttonBox, table);
     }

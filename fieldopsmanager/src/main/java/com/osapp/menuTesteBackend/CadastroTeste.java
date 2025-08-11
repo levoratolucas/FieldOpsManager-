@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.osapp.controller.*;
 import com.osapp.model.Cidade;
+import com.osapp.model.Cliente;
 import com.osapp.model.Estado;
 
 public class CadastroTeste {
@@ -63,8 +64,8 @@ public class CadastroTeste {
             }
 
             if (cidade != null) {
-                // Cidade válida, prossegue com cadastro de endereço
-                enderecoController.adicionarEndereco(rua, bairro, numero, cidade);
+                Cliente cliente = new Cliente();
+                enderecoController.adicionarEndereco(rua, bairro, numero, cidade,cliente);
                 System.out.println("Endereço cadastrado com sucesso!");
             }
         }

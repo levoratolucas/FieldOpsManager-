@@ -17,14 +17,19 @@ public class Endereco {
     @JoinColumn(name = "cidade_id")
     private Cidade cidade;
 
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
     public Endereco() {
     }
 
-    public Endereco(String rua,String bairro, String numero, Cidade cidade) {
+    public Endereco(String rua,String bairro, String numero, Cidade cidade, Cliente cliente) {
         this.rua = rua;
         this.cidade = cidade;
         this.bairro = bairro;
         this.numero = numero;
+        this.cliente = cliente;
     }
 
     public Long getId() {

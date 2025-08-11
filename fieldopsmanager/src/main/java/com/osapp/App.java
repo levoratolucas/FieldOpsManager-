@@ -64,20 +64,40 @@
 // // }
 
 
-
-package com.osapp;
+// _____________________________________________________________ 
+// package com.osapp;
 
 // import com.osapp.controller.CidadeController;
 // import com.osapp.controller.EnderecoController;
 // import com.osapp.controller.EstadoController;
-import com.osapp.menuTesteBackend.MenuPrincipal;
+// import com.osapp.menuTesteBackend.MenuPrincipal;
 
-public class App {
+// public class App {
+//     public static void main(String[] args) {
+//         EnderecoController enderecoController = new EnderecoController();
+//         CidadeController cidadeController = new CidadeController();
+//         EstadoController estadoController = new EstadoController();
+//         MenuPrincipal menu = new MenuPrincipal();
+//         menu.cadastrarEndereco(enderecoController, cidadeController, estadoController);
+//     }
+// }
+// ___________________________________________________________________ 
+package com.osapp;
+
+import com.osapp.util.ViewManager;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class App extends Application {
+    @Override
+    public void start(Stage stage) {
+        ViewManager.setStage(stage);
+        ViewManager.mostrarCidadeView(); // Tela inicial
+        stage.setTitle("FieldOps Manager");
+        stage.show();
+    }
+
     public static void main(String[] args) {
-        // EnderecoController enderecoController = new EnderecoController();
-        // CidadeController cidadeController = new CidadeController();
-        // EstadoController estadoController = new EstadoController();
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.menu();
+        launch(args);
     }
 }

@@ -2,20 +2,25 @@ package com.osapp.view;
 
 import java.util.*;
 import com.osapp.util.Tools;
+import com.osapp.util.ViewManager;
+
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import javafx.event.*;
 
-public class LayoutDidatico {
+public class CidadeView {
     private BorderPane root;
 
-    public LayoutDidatico() {
+    public CidadeView() {
         root = new BorderPane();
 
-        List<Button> botoes = Tools.navbar("Layout");
+        
+
+        List<Button> botoes = Tools.navbar("Cidade");
 
         String estilo = "-fx-background-color: #6495ED;";
 
-        HBox header = Tools.criarHeader("Minha App", estilo, 10, botoes);
+        HBox header = Tools.criarHeader("CidadeView", estilo, 10, botoes);
         VBox nav = Tools.nav();
         VBox workspace = Tools.workspace();
         HBox mainContent = Tools.criarMain(nav, workspace);

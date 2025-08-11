@@ -1,6 +1,7 @@
 package com.osapp.controller;
 
 import com.osapp.model.Cidade;
+import com.osapp.model.Cliente;
 import com.osapp.model.Endereco;
 import com.osapp.service.EnderecoService;
 
@@ -10,8 +11,8 @@ public class EnderecoController {
 
     private final EnderecoService service = new EnderecoService();
 
-    public void adicionarEndereco(String rua, String bairro, String numero, Cidade cidade) {
-        service.adicionarEndereco(rua, bairro, numero, cidade);
+    public void adicionarEndereco(String rua, String bairro, String numero, Cidade cidade, Cliente cliente) {
+        service.adicionarEndereco(rua, bairro, numero, cidade, cliente);
     }
 
     public List<Endereco> listarEnderecos() {

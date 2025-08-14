@@ -4,7 +4,6 @@ import java.util.*;
 import com.osapp.util.Tools;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
-import javafx.event.*;
 
 public class OsView {
     private BorderPane root;

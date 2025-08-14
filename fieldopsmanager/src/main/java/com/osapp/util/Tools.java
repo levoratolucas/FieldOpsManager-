@@ -4,6 +4,8 @@ import java.util.*;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.*;
 
 public class Tools {
@@ -17,6 +19,8 @@ public class Tools {
     // BorderPane.setMargin(header, new Insets(0, 0, 5, 0));
     // root.setTop(header);
     // }
+
+    public static Object controler;
 
     public static Button criarBotao(String texto, EventHandler<ActionEvent> acao) {
         Button botao = new Button(texto);
@@ -126,4 +130,26 @@ public class Tools {
         return Tools.criarBotoes(nomesFiltrados.toArray(new String[0]), acoes);
     }
 
+    public static <T> TableView<T> criarTabela(String[] colunas, List<T> objetos) {
+        TableView<T> table = new TableView<>();
+        ObservableList<T> data = FXCollections.observableArrayList(objetos);
+        table.setItems(data);
+
+        for (int i = 0; i < colunas.length; i++) {
+            final int index = i;
+            TableColumn<T, String> col = new TableColumn<>(colunas[i]);
+            col.setCellValueFactory(c -> {
+                String[] partes = c.getValue().toString().split("\\|");
+                if (index < partes.length) {
+                    return new javafx.beans.property.SimpleStringProperty(partes[index]);
+                } else {
+                    return new javafx.beans.property.SimpleStringProperty("");
+                }
+            });
+            table.getColumns().add(col);
+        }
+
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        return table;
+    }
 }

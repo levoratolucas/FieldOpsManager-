@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "enderecos")
-public class Endereco {
+public class Endereco implements Listar{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -68,5 +68,11 @@ public class Endereco {
 
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
+    }
+    @Override
+    public String toString() {
+        return this.rua + " | " + this.bairro + " | " + this.numero + " | " +
+               (cidade != null ? cidade.getName() : "Sem cidade") + " | " +
+               (cliente != null ? cliente.getName() : "Sem cliente");
     }
 }

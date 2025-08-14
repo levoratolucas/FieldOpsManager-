@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ordem_servicos")
-public class OS {
+public class OS implements Listar{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -70,5 +70,12 @@ public class OS {
 
     public void setColaborador(Colaborador colaborador) {
         this.colaborador = colaborador;
+    }
+    @Override
+    public String toString() {
+        return "OS: " + this.OS +
+               " | Cliente: " + (cliente != null ? cliente.getName() : "N/A") +
+               " | Colaborador: " + (colaborador != null ? colaborador.getName() : "N/A") +
+               " | Comentários: " + (comentarios != null ? comentarios : "");
     }
 }

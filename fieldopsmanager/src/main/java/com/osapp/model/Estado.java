@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "estados")
-public class Estado {
+public class Estado implements Listar{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,5 +43,9 @@ public class Estado {
 
     public void setSigla(String sigla) {
         this.sigla = sigla;
+    }
+    @Override
+    public String toString() {
+        return this.name + " | " + this.sigla;
     }
 }

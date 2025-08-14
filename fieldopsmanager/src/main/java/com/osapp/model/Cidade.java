@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "cidades")
-public class Cidade {
+public class Cidade implements Listar{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,7 +15,8 @@ public class Cidade {
     @JoinColumn(name = "estado_id")
     private Estado estado;
 
-    public Cidade() {}
+    public Cidade() {
+    }
 
     public Cidade(String name, Estado estado) {
         this.name = name;
@@ -44,5 +45,10 @@ public class Cidade {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " | " + (estado != null ? estado.toString() : "Sem estado");
     }
 }

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "scripts")
-public class Scripts {
+public class Scripts implements Listar{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,5 +73,12 @@ public class Scripts {
 
     public void setOs(OS os) {
         this.os = os;
+    }
+    @Override
+    public String toString() {
+        return "Script: " + (script != null ? script : "") +
+               " | Comentário: " + (comentario != null ? comentario : "") +
+               " | Equipamento: " + (equipamento != null ? equipamento.getName() : "N/A") +
+               " | OS: " + (os != null ? os.getOS() : "N/A");
     }
 }

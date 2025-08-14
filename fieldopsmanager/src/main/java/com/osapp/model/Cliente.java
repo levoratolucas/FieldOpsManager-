@@ -4,22 +4,18 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "clientes")
-public class Cliente {
+public class Cliente implements Listar{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "endereco_id")
-    private Endereco endereco;
-
     public Cliente() {}
 
-    public Cliente(String name, Endereco endereco) {
+    public Cliente(String name) {
         this.name = name;
-        this.endereco = endereco;
+        
     }
 
     public Long getId() {
@@ -38,12 +34,10 @@ public class Cliente {
         this.name = name;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+     @Override
+    public String toString() {
+        return this.name;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
 }
 

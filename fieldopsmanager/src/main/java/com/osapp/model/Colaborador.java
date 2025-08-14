@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "colaboradores")
-public class Colaborador {
+public class Colaborador implements Listar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,5 +46,10 @@ public class Colaborador {
 
     public void setRe(String re) {
         this.re = re;
+    }
+     
+    @Override
+    public String toString(){
+        return this.id+ "|"+ this.name + "|" + this.re;
     }
 }

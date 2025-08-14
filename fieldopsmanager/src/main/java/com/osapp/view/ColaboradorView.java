@@ -41,26 +41,11 @@ public class ColaboradorView {
 
         colaboradores = FXCollections.observableArrayList(controller.listarColaboradores());
 
-        table = new TableView<>(colaboradores);
-        TableColumn<Colaborador, Long> idCol = new TableColumn<>("ID");
-        idCol.setCellValueFactory(c -> new javafx.beans.property.SimpleLongProperty(c.getValue().getId()).asObject());
+        String[] nomesColunas = { "ID", "Nome", "RE" };
+        TableView<Colaborador> table = Tools.criarTabela(nomesColunas, colaboradores);
+        table.setItems(colaboradores); 
 
-        TableColumn<Colaborador, String> nomeCol = new TableColumn<>("Nome");
-        nomeCol.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getName()));
-
-        TableColumn<Colaborador, String> reCol = new TableColumn<>("RE");
-        reCol.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getRe()));
-
-        table.getColumns().addAll(idCol, nomeCol, reCol);
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        table.setOnMouseClicked(e -> {
-            Colaborador c = table.getSelectionModel().getSelectedItem();
-            if (c != null) {
-                nomeInput.setText(c.getName());
-                reInput.setText(c.getRe());
-            }
-        });
+        table.setOnMouseClicked(e -> ColaboradorActions.selectByTable(table, nomeInput, reInput));
 
         ColaboradorActions.nomeInput = nomeInput;
         ColaboradorActions.reInput = reInput;
@@ -94,4 +79,9 @@ public class ColaboradorView {
         nomeInput.clear();
         reInput.clear();
     }
+
+
+    
+
+    
 }

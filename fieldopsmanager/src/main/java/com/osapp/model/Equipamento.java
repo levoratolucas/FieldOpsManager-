@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "equipamentos")
-public class Equipamento {
+public class Equipamento implements Listar{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,5 +43,9 @@ public class Equipamento {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+    @Override
+    public String toString() {
+        return this.name + " | " + this.tipo;
     }
 }

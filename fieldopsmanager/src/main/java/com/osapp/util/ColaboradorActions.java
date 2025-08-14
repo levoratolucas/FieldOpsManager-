@@ -57,4 +57,12 @@ public class ColaboradorActions {
             showAlert("Atenção", "Selecione um colaborador para excluir", Alert.AlertType.WARNING);
         }
     }
+
+     public static void selectByTable(TableView<Colaborador> table, TextField nomeInput, TextField reInput) {
+        Colaborador c = table.getSelectionModel().getSelectedItem();
+        if (c != null) {
+            nomeInput.setText(c.getName());
+            reInput.setText(c.getRe());
+        }
+    }
 }

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "contatos")
-public class Contato {
+public class Contato implements Listar{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,5 +57,10 @@ public class Contato {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+    @Override
+    public String toString() {
+        return this.name + " | " + this.telefone + " | " + 
+               (cliente != null ? cliente.getName() : "Sem cliente");
     }
 }

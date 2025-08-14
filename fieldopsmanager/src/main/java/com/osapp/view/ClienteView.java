@@ -1,15 +1,17 @@
 package com.osapp.view;
 
 import java.util.*;
+
+import com.osapp.controller.ClienteController;
 import com.osapp.util.Tools;
-import com.osapp.util.ViewManager;
 
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
-import javafx.event.*;
 
 public class ClienteView {
     private BorderPane root;
+    private ClienteController controller;
+    
 
     public ClienteView() {
         root = new BorderPane();
@@ -23,6 +25,13 @@ public class ClienteView {
         VBox workspace = Tools.workspace();
         HBox mainContent = Tools.criarMain(nav, workspace);
         Label footer = Tools.criarFooter();
+
+        TableView<?> table = Tools.criarTabela(
+                new String[] { "Cidade", "Estado","Sigla" },
+                controller.listarClientes()
+        );
+        workspace.getChildren().add(table);
+        
 
         root.setTop(header);
         root.setCenter(mainContent);

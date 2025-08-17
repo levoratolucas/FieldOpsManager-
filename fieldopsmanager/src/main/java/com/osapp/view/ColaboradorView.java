@@ -11,25 +11,23 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
 
 public class ColaboradorView {
-    private VBox layout;
-    private TableView<Colaborador> table;
     private TextField nomeInput;
     private TextField reInput;
     private ObservableList<Colaborador> colaboradores;
 
     private ColaboradorController controller;
+    private BorderPane root;
 
     public ColaboradorView() {
+        root = new BorderPane();
         this.controller = new ColaboradorController();
-
-        layout = new VBox(10);
-        layout.setPadding(new Insets(15));
 
         Label label = new Label("Cadastro de Colaboradores");
 
@@ -43,7 +41,7 @@ public class ColaboradorView {
 
         String[] nomesColunas = { "ID", "Nome", "RE" };
         TableView<Colaborador> table = Tools.criarTabela(nomesColunas, colaboradores);
-        table.setItems(colaboradores); 
+        table.setItems(colaboradores);
 
         table.setOnMouseClicked(e -> ColaboradorActions.selectByTable(table, nomeInput, reInput));
 
@@ -60,18 +58,29 @@ public class ColaboradorView {
                 e -> ColaboradorActions.edit(),
                 e -> ColaboradorActions.delete());
 
-        List<Button> btn = Tools.criarBotoes(nomes, acoes);
+        List<Button> btn2 = Tools.criarBotoes(nomes, acoes);
 
-        btn.addAll(Tools.navbar("Colaborador"));
+        List<Button> btn =Tools.navbar("Colaborador");
 
-        HBox buttonBox = new HBox(10);
-        buttonBox.getChildren().addAll(btn);
+        String estilo = "-fx-background-color: #6495ED;";
+        HBox header = Tools.criarHeader("EstadoView", estilo, 10, btn);
+        VBox nav = Tools.nav();
+        nav.getChildren().addAll(label, nomeInput, reInput);
+        nav.getChildren().addAll(btn2);
+        VBox workspace = Tools.workspace();
+        workspace.getChildren().addAll(table);
+        HBox mainContent = Tools.criarMain(nav, workspace);
+        Label footer = Tools.criarFooter();
 
-        layout.getChildren().addAll(label, nomeInput, reInput, buttonBox, table);
+
+        root.setTop(header);
+        root.setCenter(mainContent);
+        root.setBottom(footer);
+
     }
 
-    public VBox getView() {
-        return layout;
+    public BorderPane getView() {
+        return root;
     }
 
     private void atualizarTabela() {
@@ -80,8 +89,4 @@ public class ColaboradorView {
         reInput.clear();
     }
 
-
-    
-
-    
 }

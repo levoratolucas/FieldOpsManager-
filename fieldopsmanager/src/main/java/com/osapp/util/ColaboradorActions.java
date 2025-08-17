@@ -58,7 +58,7 @@ public class ColaboradorActions {
         }
     }
 
-     public static void selectByTable(TableView<Colaborador> table, TextField nomeInput, TextField reInput) {
+    public static void selectByTable(TableView<Colaborador> table, TextField nomeInput, TextField reInput) {
         Colaborador c = table.getSelectionModel().getSelectedItem();
         if (c != null) {
             nomeInput.setText(c.getName());

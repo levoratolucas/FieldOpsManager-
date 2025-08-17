@@ -6,11 +6,9 @@ import com.osapp.controller.CidadeController;
 import com.osapp.model.Cidade;
 import com.osapp.util.Table;
 import com.osapp.util.Tools;
-import com.osapp.util.ViewManager;
 
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
-import javafx.event.*;
 
 public class CidadeView {
     private BorderPane root;

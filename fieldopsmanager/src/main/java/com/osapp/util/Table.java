@@ -5,7 +5,6 @@ import java.util.List;
 import com.osapp.controller.CidadeController;
 import com.osapp.model.Cidade;
 import com.osapp.model.Colaborador;
-import com.osapp.util.Tools;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;;

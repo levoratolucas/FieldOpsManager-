@@ -3,7 +3,6 @@ package com.osapp.view;
 import java.util.List;
 
 import com.osapp.controller.EstadoController;
-import com.osapp.model.Estado;
 import com.osapp.util.Tools;
 
 import javafx.scene.layout.*;

@@ -1,7 +1,5 @@
 package com.osapp.view;
 
-import java.util.*;
-import com.osapp.util.Tools;
 import javafx.scene.layout.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;

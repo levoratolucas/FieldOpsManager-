@@ -3,6 +3,8 @@ package com.osapp.view;
 import java.util.*;
 
 import com.osapp.controller.CidadeController;
+import com.osapp.model.Cidade;
+import com.osapp.util.Table;
 import com.osapp.util.Tools;
 import com.osapp.util.ViewManager;
 
@@ -31,10 +33,7 @@ public class CidadeView {
         HBox mainContent = Tools.criarMain(nav, workspace);
         Label footer = Tools.criarFooter();
 
-        TableView<?> table = Tools.criarTabela(
-                new String[] { "Cidade", "Estado","Sigla" },
-                controller.listarCidades()
-        );
+        TableView<Cidade> table = Table.tabelaCidade(controller);
         workspace.getChildren().add(table);
 
         root.setTop(header);

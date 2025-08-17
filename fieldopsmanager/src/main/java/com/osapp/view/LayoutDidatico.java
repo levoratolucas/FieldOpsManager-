@@ -10,20 +10,22 @@ public class LayoutDidatico {
 
     public LayoutDidatico() {
         root = new BorderPane();
+        String estilo = "-fx-background-color: #000000ff;";
 
-        List<Button> botoes = Tools.navbar("Layout");
+        HBox top = new HBox();
 
-        String estilo = "-fx-background-color: #6495ED;";
+        top.setStyle("-fx-background-color: #ed6464ff;");
 
-        HBox header = Tools.criarHeader("Minha App", estilo, 10, botoes);
-        VBox nav = Tools.nav();
-        VBox workspace = Tools.workspace();
-        HBox mainContent = Tools.criarMain(nav, workspace);
-        Label footer = Tools.criarFooter();
+        HBox leftBox = new HBox();
+        leftBox.setStyle("-fx-background-color: #6495ED;");
+        HBox rigthHBox = new HBox();
+        rigthHBox.setStyle(estilo);
 
-        root.setTop(header);
-        root.setCenter(mainContent);
-        root.setBottom(footer);
+        top.getChildren().addAll(leftBox,rigthHBox);
+
+        root.setTop(top);
+        // root.setCenter();
+        // root.setBottom();
     }
 
     public BorderPane getView() {

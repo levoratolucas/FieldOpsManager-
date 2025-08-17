@@ -1,8 +1,11 @@
 package com.osapp.view;
 
+import com.osapp.controller.CidadeController;
 import com.osapp.controller.ColaboradorController;
+import com.osapp.model.Cidade;
 import com.osapp.model.Colaborador;
 import com.osapp.util.ColaboradorActions;
+import com.osapp.util.Table;
 import com.osapp.util.Tools;
 
 import javafx.collections.FXCollections;
@@ -28,6 +31,7 @@ public class ColaboradorView {
     public ColaboradorView() {
         root = new BorderPane();
         this.controller = new ColaboradorController();
+        CidadeController cidadeController = new CidadeController();
 
         Label label = new Label("Cadastro de Colaboradores");
 
@@ -39,8 +43,8 @@ public class ColaboradorView {
 
         colaboradores = FXCollections.observableArrayList(controller.listarColaboradores());
 
-        String[] nomesColunas = { "ID", "Nome", "RE" };
-        TableView<Colaborador> table = Tools.criarTabela(nomesColunas, colaboradores);
+        TableView<Colaborador> table = Table.tableColaborador(colaboradores);
+
         table.setItems(colaboradores);
 
         table.setOnMouseClicked(e -> ColaboradorActions.selectByTable(table, nomeInput, reInput));
@@ -51,27 +55,34 @@ public class ColaboradorView {
         ColaboradorActions.controller = controller;
         ColaboradorActions.atualizarTabela = this::atualizarTabela;
 
-        String[] nomes = { "Adicionar", "Editar", "Excluir" };
+        String[] nomes = { "Adicionar", "Editar", "Excluir", "Cliente table","Colaborador" };
+        VBox workspace = Tools.workspace();
 
         List<EventHandler<ActionEvent>> acoes = List.of(
                 e -> ColaboradorActions.add(),
                 e -> ColaboradorActions.edit(),
-                e -> ColaboradorActions.delete());
+                e -> ColaboradorActions.delete(),
+                e -> {
+                    TableView<Cidade> tabelaCidade = Table.tabelaCidade(cidadeController);
+                    workspace.getChildren().setAll(tabelaCidade);
+                },
+                e -> {
+                    TableView<Colaborador> tabelaColaborador = Table.tableColaborador(colaboradores);
+                    workspace.getChildren().setAll(tabelaColaborador);
+                });
 
         List<Button> btn2 = Tools.criarBotoes(nomes, acoes);
 
-        List<Button> btn =Tools.navbar("Colaborador");
+        List<Button> btn = Tools.navbar("Colaborador");
 
         String estilo = "-fx-background-color: #6495ED;";
         HBox header = Tools.criarHeader("EstadoView", estilo, 10, btn);
         VBox nav = Tools.nav();
         nav.getChildren().addAll(label, nomeInput, reInput);
         nav.getChildren().addAll(btn2);
-        VBox workspace = Tools.workspace();
         workspace.getChildren().addAll(table);
         HBox mainContent = Tools.criarMain(nav, workspace);
         Label footer = Tools.criarFooter();
-
 
         root.setTop(header);
         root.setCenter(mainContent);

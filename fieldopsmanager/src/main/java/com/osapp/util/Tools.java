@@ -2,6 +2,7 @@ package com.osapp.util;
 
 import java.util.*;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.collections.FXCollections;
@@ -43,6 +44,60 @@ public class Tools {
 
         return botoes;
     }
+
+    // -------------------------------------------------------------- teste função
+    // grid
+    public static GridPane criarGridGenerico(List<Node> nodes, int colunas) {
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(10));
+        grid.setGridLinesVisible(true);
+
+        for (int i = 0; i < nodes.size(); i++) {
+            int col = i % colunas;
+            int row = i / colunas;
+            grid.add(nodes.get(i), col, row);
+        }
+
+        // Faz as colunas expandirem igualmente
+        for (int i = 0; i < colunas; i++) {
+            ColumnConstraints cc = new ColumnConstraints();
+            cc.setHgrow(Priority.ALWAYS);
+            grid.getColumnConstraints().add(cc);
+        }
+
+        return grid;
+    }
+
+    public static GridPane criarGridBotoes(List<Button> botoes) {
+        GridPane grid = new GridPane();
+        grid.setHgap(10); // espaço horizontal entre os botões
+        grid.setVgap(10); // espaço vertical entre os botões
+        grid.setPadding(new Insets(10));
+        grid.setGridLinesVisible(false);
+
+        int colunas = 3; // sempre 3 colunas
+        for (int i = 0; i < botoes.size(); i++) {
+            int col = i % colunas; // posição da coluna (0,1,2)
+            int row = i / colunas; // posição da linha
+            grid.add(botoes.get(i), col, row);
+        }
+
+        // Faz os botões expandirem para preencher as células
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setHgrow(Priority.ALWAYS);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setHgrow(Priority.ALWAYS);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setHgrow(Priority.ALWAYS);
+        grid.getColumnConstraints().addAll(col1, col2, col3);
+
+        return grid;
+    }
+
+    // -------------------------------------------------------------- teste função
+    // grid
 
     public static HBox criarHeader(String title, String style, int padding, List<Button> botoes) {
         Label titleLabel = new Label(title);
@@ -112,7 +167,6 @@ public class Tools {
                 "Cliente", () -> ViewManager.mostrarClienteView(),
                 "Colaborador", () -> ViewManager.mostrarColaboradorView(),
                 "Estado", () -> ViewManager.mostrarEstadoView(),
-                "Layout", () -> ViewManager.mostrarLayoutDidaticoView(),
                 "OS", () -> ViewManager.mostrarOsView());
 
         // Lista com nomes que devem ser excluídos

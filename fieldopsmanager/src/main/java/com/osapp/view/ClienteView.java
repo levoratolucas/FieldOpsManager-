@@ -3,6 +3,7 @@ package com.osapp.view;
 import java.util.*;
 
 import com.osapp.controller.ClienteController;
+import com.osapp.util.Table;
 import com.osapp.util.Tools;
 
 import javafx.scene.layout.*;
@@ -26,10 +27,7 @@ public class ClienteView {
         HBox mainContent = Tools.criarMain(nav, workspace);
         Label footer = Tools.criarFooter();
 
-        TableView<?> table = Tools.criarTabela(
-                new String[] { "Cidade", "Estado","Sigla" },
-                controller.listarClientes()
-        );
+        TableView<?> table = Table.tabelaCliente(controller);
         workspace.getChildren().add(table);
         
 

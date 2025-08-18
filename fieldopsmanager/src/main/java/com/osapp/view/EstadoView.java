@@ -3,6 +3,7 @@ package com.osapp.view;
 import java.util.List;
 
 import com.osapp.controller.EstadoController;
+import com.osapp.util.Table;
 import com.osapp.util.Tools;
 
 import javafx.scene.layout.*;
@@ -25,12 +26,10 @@ public class EstadoView {
         VBox workspace = Tools.workspace();
         HBox mainContent = Tools.criarMain(nav, workspace);
         Label footer = Tools.criarFooter();
-        TableView<?> table = Tools.criarTabela(
-                new String[] { "Nome", "Sigla" },
-                controller.listarEstados()
-        );
 
-        workspace.getChildren().add(table); // adiciona a tabela ao workspace
+        TableView<?> table = Table.tabelaEstado(controller);
+
+        workspace.getChildren().add(table);
 
         root.setTop(header);
         root.setCenter(mainContent);
